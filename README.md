@@ -15,6 +15,10 @@
   <a href="#demo-mode">Demo</a> · <a href="docs/ARCHITECTURE.md">Architecture</a> · <a href="docs/ML_HARDENING.md">ML hardening</a> · <a href="docs/PRIVACY.md">Privacy</a> · <a href="docs/DEMO_GUIDE.md">Demo guide</a>
 </p>
 
+![SCAMTRACE visual identity — suspicious conversation signals are evaluated locally and converted into protective evidence.](assets/scamtrace-conversation-firewall.png)
+
+<p align="center"><sub>SCAMTRACE visual identity: suspicious conversational signals are transformed into local, explainable protection.</sub></p>
+
 SCAMTRACE is a privacy-preserving, real-time conversational security layer for CodeGyaan’26. It consumes a typed transcript, local ASR segment stream, or uploaded recording and identifies behavioral signs of social engineering: authority impersonation, threats, urgency, isolation, credential extraction, payment demands, and remote-access requests.
 
 It does **not** make a legal accusation or treat an AI-generated voice as automatically malicious. Its core question is: *is this conversation behaving like a cyberattack?*
