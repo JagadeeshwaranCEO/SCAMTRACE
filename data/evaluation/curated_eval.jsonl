@@ -1,0 +1,21 @@
+{"id":"E01","label":"benign","language":"en","text":"Please call the hospital reception through the number printed on your appointment card."}
+{"id":"E02","label":"benign","language":"en","text":"I have already paid the tuition fee through the college portal."}
+{"id":"E03","label":"benign","language":"en","text":"Do you know whether the courier office is open on Saturday?"}
+{"id":"E04","label":"benign","language":"en","text":"Never give your OTP to strangers, even if they say they are from a bank."}
+{"id":"E05","label":"benign","language":"ta","text":"நாளை பள்ளி விடுமுறை என்பதால் குழந்தைகள் வீட்டில் இருப்பார்கள்."}
+{"id":"E06","label":"benign","language":"hi","text":"अपने बैंक की आधिकारिक वेबसाइट से ही जानकारी लें।"}
+{"id":"E07","label":"benign","language":"hinglish","text":"Kal UPI se dost ko lunch ka paisa bhejna hai."}
+{"id":"E08","label":"benign","language":"en","text":"The police station is near the post office, not near the market."}
+{"id":"E09","label":"benign","language":"en","text":"My father will pick me up after the train arrives."}
+{"id":"E10","label":"benign","language":"en","text":"The software update asks us to read its privacy notice first."}
+{"id":"S01","label":"scam","language":"en","text":"I am from the RBI. Your account is frozen because of a criminal case, so transfer the balance now."}
+{"id":"S02","label":"scam","language":"en","text":"This is a final warning from customs. Stay connected and pay the charge through UPI."}
+{"id":"S03","label":"scam","language":"en","text":"Your SIM will be blocked in ten minutes. Share the verification code immediately."}
+{"id":"S04","label":"scam","language":"en","text":"The bank security team needs you to install TeamViewer and share your screen."}
+{"id":"S05","label":"scam","language":"ta","text":"காவல் துறையிலிருந்து பேசுகிறேன். யாரிடமும் சொல்லாதீர்கள், உடனே பணம் அனுப்புங்கள்."}
+{"id":"S06","label":"scam","language":"hi","text":"पुलिस विभाग से बोल रहा हूं, कॉल मत काटना और पैसे ट्रांसफर करो।"}
+{"id":"S07","label":"scam","language":"hinglish","text":"Aapka account block hone wala hai, OTP batao aur kisi ko mat batana."}
+{"id":"S08","label":"scam","language":"en","text":"Your daughter is in trouble after an accident. Do not call her; send a security deposit now."}
+{"id":"S09","label":"scam","language":"en","text":"A courier officer says prohibited documents were found and threatens legal action unless you pay."}
+{"id":"S10","label":"scam","language":"en","text":"Complete the KYC now by giving your Aadhaar number, PIN, and password."}
+

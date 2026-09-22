@@ -1,0 +1,282 @@
+{
+  "generated_at": "2026-09-22T17:26:34.468358+00:00",
+  "dataset": {
+    "name": "SCAMTRACE curated multilingual regression set",
+    "rows": 20,
+    "class_distribution": {
+      "benign": 10,
+      "scam": 10
+    },
+    "important_limit": "This is a small hand-curated regression suite used to exercise tactic coverage. It is not an independent held-out evaluation or representative real-world benchmark."
+  },
+  "metrics": {
+    "rule_engine_only": {
+      "n": 20,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "confusion_matrix": {
+        "tp": 10,
+        "tn": 10,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "classifier_only": {
+      "n": 20,
+      "accuracy": 0.75,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6667,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.5,
+      "confusion_matrix": {
+        "tp": 5,
+        "tn": 10,
+        "fp": 0,
+        "fn": 5
+      }
+    },
+    "attack_engine_only": {
+      "n": 20,
+      "accuracy": 0.85,
+      "precision": 1.0,
+      "recall": 0.7,
+      "f1": 0.8235,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.3,
+      "confusion_matrix": {
+        "tp": 7,
+        "tn": 10,
+        "fp": 0,
+        "fn": 3
+      }
+    },
+    "classifier_plus_attack_engine": {
+      "n": 20,
+      "accuracy": 0.9,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.8889,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.2,
+      "confusion_matrix": {
+        "tp": 8,
+        "tn": 10,
+        "fp": 0,
+        "fn": 2
+      }
+    },
+    "full_scamtrace": {
+      "n": 20,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "confusion_matrix": {
+        "tp": 10,
+        "tn": 10,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "full_plus_voice_signal": {
+      "n": 20,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "confusion_matrix": {
+        "tp": 10,
+        "tn": 10,
+        "fp": 0,
+        "fn": 0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E02",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E03",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E04",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E05",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E06",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E07",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E08",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E09",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "E10",
+      "actual": "benign",
+      "predicted_level": "LOW",
+      "score": 1,
+      "tactics": []
+    },
+    {
+      "id": "S01",
+      "actual": "scam",
+      "predicted_level": "VERIFY",
+      "score": 32,
+      "tactics": [
+        "AUTHORITY_IMPERSONATION",
+        "THREAT"
+      ]
+    },
+    {
+      "id": "S02",
+      "actual": "scam",
+      "predicted_level": "CRITICAL",
+      "score": 77,
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "AUTHORITY_IMPERSONATION",
+        "ISOLATION",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "S03",
+      "actual": "scam",
+      "predicted_level": "HIGH",
+      "score": 59,
+      "tactics": [
+        "CREDENTIAL_REQUEST",
+        "THREAT",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "S04",
+      "actual": "scam",
+      "predicted_level": "HIGH",
+      "score": 57,
+      "tactics": [
+        "REMOTE_ACCESS",
+        "AUTHORITY_IMPERSONATION"
+      ]
+    },
+    {
+      "id": "S05",
+      "actual": "scam",
+      "predicted_level": "CRITICAL",
+      "score": 73,
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "AUTHORITY_IMPERSONATION",
+        "ISOLATION",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "S06",
+      "actual": "scam",
+      "predicted_level": "CRITICAL",
+      "score": 63,
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "AUTHORITY_IMPERSONATION",
+        "ISOLATION"
+      ]
+    },
+    {
+      "id": "S07",
+      "actual": "scam",
+      "predicted_level": "VERIFY",
+      "score": 33,
+      "tactics": [
+        "CREDENTIAL_REQUEST"
+      ]
+    },
+    {
+      "id": "S08",
+      "actual": "scam",
+      "predicted_level": "CRITICAL",
+      "score": 77,
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "FAMILY_EMERGENCY",
+        "ISOLATION"
+      ]
+    },
+    {
+      "id": "S09",
+      "actual": "scam",
+      "predicted_level": "HIGH",
+      "score": 54,
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "THREAT"
+      ]
+    },
+    {
+      "id": "S10",
+      "actual": "scam",
+      "predicted_level": "VERIFY",
+      "score": 24,
+      "tactics": [
+        "CREDENTIAL_REQUEST"
+      ]
+    }
+  ],
+  "voice_ablation_note": "No external voice dataset has been incorporated yet, so Full + Voice is intentionally identical to Full. No voice metric is claimed."
+}

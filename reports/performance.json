@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-09-22T17:26:34.834683+00:00",
+  "environment": {
+    "python": "3.11.15",
+    "platform": "macOS-26.3.1-arm64-arm-64bit"
+  },
+  "model_load_ms": 1.45,
+  "text_analysis_ms": {
+    "runs": 30,
+    "mean": 1.319,
+    "p50": 1.203,
+    "p95": 1.488
+  },
+  "python_cpu_time_per_text_analysis_ms": 1.311,
+  "peak_rss_mb": 32.91,
+  "language_model_size_bytes": 120330,
+  "asr_model_size_bytes": 147951465,
+  "asr_latency": {
+    "measured": false,
+    "reason": "Pass --audio /path/to/clip.wav to measure local ASR latency."
+  },
+  "asr": {
+    "engine": "whisper.cpp",
+    "available": true,
+    "binary": "whisper-cli",
+    "model": "/Users/jagadeeshwaran/cell phone $/models/ggml-base.bin",
+    "model_available": true,
+    "message": "Ready for local transcription."
+  },
+  "network_dependency_at_inference": "NONE",
+  "note": "ASR latency is reported only once a local whisper.cpp model is installed; this benchmark never makes network calls."
+}

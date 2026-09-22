@@ -1,0 +1,11 @@
+flowchart LR
+    I["Timestamped local transcript"] --> N["Normalisation + polarity guard"]
+    N --> T["Evidence extractor"]
+    T --> G["Threat Narrative Graph"]
+    G --> F["Evidence fusion (non-probabilistic)"]
+    C["Language baseline"] --> F
+    V["Voice authenticity (non-decisive)"] --> F
+    F --> P["Counter-Pressure Protocol"]
+    G --> X["Counterfactuals"]
+    P --> U["Safe exit"]
+    X --> U

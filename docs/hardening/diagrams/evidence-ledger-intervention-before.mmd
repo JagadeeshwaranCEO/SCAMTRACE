@@ -1,0 +1,8 @@
+flowchart LR
+    I["Audio / transcript"] --> D["Tactic detector"]
+    I --> C["Language baseline"]
+    D --> P["Progression score"]
+    C --> F["Evidence fusion"]
+    P --> F
+    V["Voice anomaly"] --> F
+    F --> A["Threat level + generic recommendations"]

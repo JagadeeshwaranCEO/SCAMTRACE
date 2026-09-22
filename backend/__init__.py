@@ -1,0 +1,2 @@
+"""SCAMTRACE local application package."""
+

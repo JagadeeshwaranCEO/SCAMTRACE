@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-09-22T17:26:34.547293+00:00",
+  "name": "SCAMTRACE Behavioural Decision Contract Suite",
+  "scope": "Deterministic safety and playbook contracts. This is not independent evaluation, field accuracy, or a model benchmark.",
+  "cases": [
+    {
+      "id": "DC01",
+      "label": "safe_advice",
+      "expected_level": "LOW",
+      "observed_level": "LOW",
+      "expected_path": null,
+      "observed_path": null,
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC02",
+      "label": "safe_synthetic_context",
+      "expected_level": "LOW",
+      "observed_level": "LOW",
+      "expected_path": null,
+      "observed_path": null,
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC03",
+      "label": "digital_arrest",
+      "expected_level": "CRITICAL",
+      "observed_level": "CRITICAL",
+      "expected_path": "digital_arrest",
+      "observed_path": "digital_arrest",
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC04",
+      "label": "bank_takeover",
+      "expected_level": "CRITICAL",
+      "observed_level": "CRITICAL",
+      "expected_path": "bank_account_takeover",
+      "observed_path": "bank_account_takeover",
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC05",
+      "label": "remote_takeover",
+      "expected_level": "CRITICAL",
+      "observed_level": "CRITICAL",
+      "expected_path": "remote_device_takeover",
+      "observed_path": "remote_device_takeover",
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC06",
+      "label": "courier_extortion",
+      "expected_level": "CRITICAL",
+      "observed_level": "CRITICAL",
+      "expected_path": "courier_customs_extortion",
+      "observed_path": "courier_customs_extortion",
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC07",
+      "label": "family_emergency",
+      "expected_level": "CRITICAL",
+      "observed_level": "CRITICAL",
+      "expected_path": "family_emergency_payment",
+      "observed_path": "family_emergency_payment",
+      "counterfactual_present": true,
+      "passed": true
+    },
+    {
+      "id": "DC08",
+      "label": "tamil_digital_arrest",
+      "expected_level": "CRITICAL",
+      "observed_level": "CRITICAL",
+      "expected_path": "digital_arrest",
+      "observed_path": "digital_arrest",
+      "counterfactual_present": true,
+      "passed": true
+    }
+  ],
+  "passed": 8,
+  "total": 8,
+  "status": "pass"
+}

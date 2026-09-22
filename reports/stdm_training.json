@@ -1,0 +1,233 @@
+{
+  "generated_at": "2026-09-21T18:19:08.670973+00:00",
+  "model": {
+    "name": "STDM-1 — SCAMTRACE Threat Decision Model",
+    "algorithm": "calibrated multiclass multinomial naive bayes over local evidence features",
+    "vocabulary_size": 529
+  },
+  "data": {
+    "trained_at": "2026-09-21T18:19:08.670973+00:00",
+    "source": "data/processed/stdm_synthetic_contrasts.jsonl",
+    "provenance": "authored synthetic contrast data for model development",
+    "split": "deterministic family-group split; template variants remain together",
+    "training_rows": 96,
+    "validation_rows": 48,
+    "development_metrics": {
+      "n": 48,
+      "state_accuracy": 0.6667,
+      "macro_f1": 0.6611,
+      "multiclass_brier_score": 0.43367,
+      "expected_calibration_error": 0.09708,
+      "reliability_bins": [
+        {
+          "bin": 3,
+          "n": 8,
+          "confidence": 0.3704,
+          "accuracy": 0.5
+        },
+        {
+          "bin": 4,
+          "n": 7,
+          "confidence": 0.4304,
+          "accuracy": 0.4286
+        },
+        {
+          "bin": 5,
+          "n": 5,
+          "confidence": 0.5744,
+          "accuracy": 0.4
+        },
+        {
+          "bin": 6,
+          "n": 2,
+          "confidence": 0.6558,
+          "accuracy": 0.5
+        },
+        {
+          "bin": 7,
+          "n": 12,
+          "confidence": 0.7656,
+          "accuracy": 0.6667
+        },
+        {
+          "bin": 8,
+          "n": 6,
+          "confidence": 0.8571,
+          "accuracy": 1.0
+        },
+        {
+          "bin": 9,
+          "n": 8,
+          "confidence": 0.9523,
+          "accuracy": 1.0
+        }
+      ],
+      "confusion_matrix": {
+        "NORMAL": {
+          "NORMAL": 4,
+          "SUSPICIOUS": 4,
+          "IMPERSONATION": 0,
+          "MANIPULATION": 0,
+          "CREDENTIAL_EXTRACTION": 0,
+          "FINANCIAL_EXTRACTION": 0
+        },
+        "SUSPICIOUS": {
+          "NORMAL": 0,
+          "SUSPICIOUS": 4,
+          "IMPERSONATION": 0,
+          "MANIPULATION": 0,
+          "CREDENTIAL_EXTRACTION": 0,
+          "FINANCIAL_EXTRACTION": 4
+        },
+        "IMPERSONATION": {
+          "NORMAL": 0,
+          "SUSPICIOUS": 0,
+          "IMPERSONATION": 4,
+          "MANIPULATION": 0,
+          "CREDENTIAL_EXTRACTION": 0,
+          "FINANCIAL_EXTRACTION": 4
+        },
+        "MANIPULATION": {
+          "NORMAL": 0,
+          "SUSPICIOUS": 0,
+          "IMPERSONATION": 0,
+          "MANIPULATION": 4,
+          "CREDENTIAL_EXTRACTION": 4,
+          "FINANCIAL_EXTRACTION": 0
+        },
+        "CREDENTIAL_EXTRACTION": {
+          "NORMAL": 0,
+          "SUSPICIOUS": 0,
+          "IMPERSONATION": 0,
+          "MANIPULATION": 0,
+          "CREDENTIAL_EXTRACTION": 8,
+          "FINANCIAL_EXTRACTION": 0
+        },
+        "FINANCIAL_EXTRACTION": {
+          "NORMAL": 0,
+          "SUSPICIOUS": 0,
+          "IMPERSONATION": 0,
+          "MANIPULATION": 0,
+          "CREDENTIAL_EXTRACTION": 0,
+          "FINANCIAL_EXTRACTION": 8
+        }
+      }
+    },
+    "state_distribution": {
+      "NORMAL": 24,
+      "SUSPICIOUS": 24,
+      "IMPERSONATION": 24,
+      "MANIPULATION": 24,
+      "CREDENTIAL_EXTRACTION": 24,
+      "FINANCIAL_EXTRACTION": 24
+    }
+  },
+  "calibration": {
+    "temperature": 4.0,
+    "method": "held-out temperature scaling by multiclass negative log likelihood",
+    "validation_rows": 48,
+    "negative_log_likelihood": 0.80004
+  },
+  "development_metrics": {
+    "n": 48,
+    "state_accuracy": 0.6667,
+    "macro_f1": 0.6611,
+    "multiclass_brier_score": 0.43367,
+    "expected_calibration_error": 0.09708,
+    "reliability_bins": [
+      {
+        "bin": 3,
+        "n": 8,
+        "confidence": 0.3704,
+        "accuracy": 0.5
+      },
+      {
+        "bin": 4,
+        "n": 7,
+        "confidence": 0.4304,
+        "accuracy": 0.4286
+      },
+      {
+        "bin": 5,
+        "n": 5,
+        "confidence": 0.5744,
+        "accuracy": 0.4
+      },
+      {
+        "bin": 6,
+        "n": 2,
+        "confidence": 0.6558,
+        "accuracy": 0.5
+      },
+      {
+        "bin": 7,
+        "n": 12,
+        "confidence": 0.7656,
+        "accuracy": 0.6667
+      },
+      {
+        "bin": 8,
+        "n": 6,
+        "confidence": 0.8571,
+        "accuracy": 1.0
+      },
+      {
+        "bin": 9,
+        "n": 8,
+        "confidence": 0.9523,
+        "accuracy": 1.0
+      }
+    ],
+    "confusion_matrix": {
+      "NORMAL": {
+        "NORMAL": 4,
+        "SUSPICIOUS": 4,
+        "IMPERSONATION": 0,
+        "MANIPULATION": 0,
+        "CREDENTIAL_EXTRACTION": 0,
+        "FINANCIAL_EXTRACTION": 0
+      },
+      "SUSPICIOUS": {
+        "NORMAL": 0,
+        "SUSPICIOUS": 4,
+        "IMPERSONATION": 0,
+        "MANIPULATION": 0,
+        "CREDENTIAL_EXTRACTION": 0,
+        "FINANCIAL_EXTRACTION": 4
+      },
+      "IMPERSONATION": {
+        "NORMAL": 0,
+        "SUSPICIOUS": 0,
+        "IMPERSONATION": 4,
+        "MANIPULATION": 0,
+        "CREDENTIAL_EXTRACTION": 0,
+        "FINANCIAL_EXTRACTION": 4
+      },
+      "MANIPULATION": {
+        "NORMAL": 0,
+        "SUSPICIOUS": 0,
+        "IMPERSONATION": 0,
+        "MANIPULATION": 4,
+        "CREDENTIAL_EXTRACTION": 4,
+        "FINANCIAL_EXTRACTION": 0
+      },
+      "CREDENTIAL_EXTRACTION": {
+        "NORMAL": 0,
+        "SUSPICIOUS": 0,
+        "IMPERSONATION": 0,
+        "MANIPULATION": 0,
+        "CREDENTIAL_EXTRACTION": 8,
+        "FINANCIAL_EXTRACTION": 0
+      },
+      "FINANCIAL_EXTRACTION": {
+        "NORMAL": 0,
+        "SUSPICIOUS": 0,
+        "IMPERSONATION": 0,
+        "MANIPULATION": 0,
+        "CREDENTIAL_EXTRACTION": 0,
+        "FINANCIAL_EXTRACTION": 8
+      }
+    }
+  },
+  "critical_limit": "Synthetic authored contrast development data only. These results are not independent evaluation, real-call accuracy, or a deployment calibration claim."
+}

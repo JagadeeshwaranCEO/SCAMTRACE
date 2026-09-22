@@ -1,0 +1,3 @@
+# Local acoustic-analysis runtime and test runner:
+numpy>=1.26
+pytest>=8.0

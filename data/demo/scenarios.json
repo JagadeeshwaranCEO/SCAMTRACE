@@ -1,0 +1,138 @@
+[
+  {
+    "id": "normal_human_call",
+    "name": "Normal human call",
+    "language": "en",
+    "transcript": "Hi Meera, are we still meeting at the library tomorrow at ten? Please bring the blue project folder. I will send you the agenda after lunch.",
+    "segments": [
+      {"start": 0, "end": 6, "text": "Hi Meera, are we still meeting at the library tomorrow at ten?"},
+      {"start": 6, "end": 12, "text": "Please bring the blue project folder. I will send you the agenda after lunch."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 8,
+      "label": "human",
+      "confidence": 0.94,
+      "model": "Declared demo provenance — human recording",
+      "available": true,
+      "warning": "Demo fixture label, not production voice-model inference."
+    }
+  },
+  {
+    "id": "ai_voice_safe",
+    "name": "AI voice — safe",
+    "language": "en",
+    "transcript": "Hello Priya. Your pharmacy reminder is scheduled for Friday morning. Please contact your doctor if you need to change the appointment.",
+    "segments": [
+      {"start": 0, "end": 7, "text": "Hello Priya. Your pharmacy reminder is scheduled for Friday morning."},
+      {"start": 7, "end": 14, "text": "Please contact your doctor if you need to change the appointment."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 92,
+      "label": "synthetic",
+      "confidence": 0.93,
+      "model": "Declared demo provenance — local TTS fixture",
+      "available": true,
+      "warning": "Demo fixture label, not production voice-model inference."
+    }
+  },
+  {
+    "id": "human_digital_arrest",
+    "name": "Human scam — digital arrest",
+    "language": "en",
+    "transcript": "This is Inspector Rao from the cybercrime department. Your Aadhaar has been linked to a money laundering case and an arrest warrant will be issued. Do not disconnect and do not tell anyone because this is confidential. You must transfer money to the safe account immediately for verification.",
+    "segments": [
+      {"start": 0, "end": 8, "text": "This is Inspector Rao from the cybercrime department."},
+      {"start": 8, "end": 18, "text": "Your Aadhaar has been linked to a money laundering case and an arrest warrant will be issued."},
+      {"start": 18, "end": 27, "text": "Do not disconnect and do not tell anyone because this is confidential."},
+      {"start": 27, "end": 38, "text": "You must transfer money to the safe account immediately for verification."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 12,
+      "label": "human",
+      "confidence": 0.91,
+      "model": "Declared demo provenance — human recording",
+      "available": true,
+      "warning": "Demo fixture label, not production voice-model inference."
+    }
+  },
+  {
+    "id": "ai_scam",
+    "name": "AI scam — bank / OTP",
+    "language": "en",
+    "transcript": "I am calling from the bank fraud department. Your account will be blocked within ten minutes. Stay on the call and do not contact the bank. Tell me the OTP and CVV now, then send the verification amount by UPI payment.",
+    "segments": [
+      {"start": 0, "end": 8, "text": "I am calling from the bank fraud department."},
+      {"start": 8, "end": 16, "text": "Your account will be blocked within ten minutes."},
+      {"start": 16, "end": 24, "text": "Stay on the call and do not contact the bank."},
+      {"start": 24, "end": 34, "text": "Tell me the OTP and CVV now, then send the verification amount by UPI payment."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 94,
+      "label": "synthetic",
+      "confidence": 0.93,
+      "model": "Declared demo provenance — local TTS fixture",
+      "available": true,
+      "warning": "Demo fixture label, not production voice-model inference."
+    }
+  },
+  {
+    "id": "tamil_scam",
+    "name": "Tamil scam",
+    "language": "ta",
+    "transcript": "நான் சைபர் கிரைம் காவல் துறையிலிருந்து பேசுகிறேன். உங்கள் ஆதார் எண்ணில் வழக்கு பதிவு செய்யப்பட்டுள்ளது. அழைப்பை துண்டிக்காதீர்கள், யாரிடமும் சொல்லாதீர்கள். உடனே பாதுகாப்பான கணக்குக்கு பணம் அனுப்புங்கள்.",
+    "segments": [
+      {"start": 0, "end": 8, "text": "நான் சைபர் கிரைம் காவல் துறையிலிருந்து பேசுகிறேன்."},
+      {"start": 8, "end": 16, "text": "உங்கள் ஆதார் எண்ணில் வழக்கு பதிவு செய்யப்பட்டுள்ளது."},
+      {"start": 16, "end": 24, "text": "அழைப்பை துண்டிக்காதீர்கள், யாரிடமும் சொல்லாதீர்கள்."},
+      {"start": 24, "end": 32, "text": "உடனே பாதுகாப்பான கணக்குக்கு பணம் அனுப்புங்கள்."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 0,
+      "label": "uncertain",
+      "confidence": 0,
+      "model": "No audio supplied",
+      "available": false,
+      "warning": "Text scenario: voice signal intentionally unavailable."
+    }
+  },
+  {
+    "id": "hinglish_scam",
+    "name": "Hinglish scam",
+    "language": "hinglish",
+    "transcript": "Main cyber crime department se bol raha hoon. Aapka Aadhaar money laundering case se linked hai aur aapka account block hoga. Call mat kaatna aur kisi ko mat batana. Abhi UPI se verification amount transfer karo.",
+    "segments": [
+      {"start": 0, "end": 8, "text": "Main cyber crime department se bol raha hoon."},
+      {"start": 8, "end": 17, "text": "Aapka Aadhaar money laundering case se linked hai aur aapka account block hoga."},
+      {"start": 17, "end": 25, "text": "Call mat kaatna aur kisi ko mat batana."},
+      {"start": 25, "end": 33, "text": "Abhi UPI se verification amount transfer karo."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 0,
+      "label": "uncertain",
+      "confidence": 0,
+      "model": "No audio supplied",
+      "available": false,
+      "warning": "Text scenario: voice signal intentionally unavailable."
+    }
+  },
+  {
+    "id": "adversarial_scam",
+    "name": "Adversarial scam",
+    "language": "en",
+    "transcript": "I am with the courier department. A prohibited parcel under your name has been held by customs. This needs urgent resolution. Keep the call private while we validate the file. Install AnyDesk so our officer can complete the secure verification.",
+    "segments": [
+      {"start": 0, "end": 9, "text": "I am with the courier department. A prohibited parcel under your name has been held by customs."},
+      {"start": 9, "end": 17, "text": "This needs urgent resolution. Keep the call private while we validate the file."},
+      {"start": 17, "end": 27, "text": "Install AnyDesk so our officer can complete the secure verification."}
+    ],
+    "voice_fixture": {
+      "synthetic_score": 0,
+      "label": "uncertain",
+      "confidence": 0,
+      "model": "No audio supplied",
+      "available": false,
+      "warning": "Text scenario: voice signal intentionally unavailable."
+    }
+  }
+]
+

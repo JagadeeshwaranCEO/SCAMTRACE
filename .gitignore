@@ -1,0 +1,15 @@
+.env
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+logs/*.jsonl
+reports/*.png
+reports/*.pdf
+data/demo/generated/
+data/raw/
+models/*.bin
+models/*.gguf
+models/*.part
+.ppt-build-scamtrace/

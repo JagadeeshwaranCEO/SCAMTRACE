@@ -1,0 +1,637 @@
+{
+  "generated_at": "2026-09-22T17:26:34.629324+00:00",
+  "name": "SCAMTRACE adversarial decision evaluation v1",
+  "dataset": "Internally authored red-team cases; 8 benign and 14 scam examples across paraphrase, ASR-noise, code-switching, and regional-language conditions.",
+  "scope": "Measured local-engine decision outcomes. Not independent field evaluation, population calibration, model-only evaluation, or a claim of real-world prevalence.",
+  "positive_decision": "HIGH or CRITICAL threat level",
+  "overall": {
+    "confusion_matrix": {
+      "tp": 14,
+      "fp": 0,
+      "tn": 8,
+      "fn": 0
+    },
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0
+  },
+  "by_group": {
+    "language": {
+      "en": {
+        "confusion_matrix": {
+          "tp": 9,
+          "fp": 0,
+          "tn": 5,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "hi": {
+        "confusion_matrix": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "hinglish": {
+        "confusion_matrix": {
+          "tp": 2,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "ta": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      }
+    },
+    "surface": {
+      "phone": {
+        "confusion_matrix": {
+          "tp": 6,
+          "fp": 0,
+          "tn": 6,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      },
+      "video_call": {
+        "confusion_matrix": {
+          "tp": 8,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0
+      }
+    },
+    "perturbation": {
+      "asr_noise": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "attacker_tamper_prompt": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "bank_routine": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "code_switch": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "code_switch_asr_noise": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "code_switch_safe": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "courier_context": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "courier_paraphrase": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "credential_synonym": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "family_context": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "family_emotion": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "hindi_script": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "minimal_direct_action": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "paraphrase": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "payment_euphemism": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "protective_guidance": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "public_awareness": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "regional_safety_advice": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "remote_access_paraphrase": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "remote_support_context": {
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": null
+      },
+      "spelling_variant": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      },
+      "tamil_script": {
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "false_negative_rate": 0.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "AR01",
+      "label": "benign",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "protective_guidance",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR02",
+      "label": "benign",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "family_context",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR03",
+      "label": "benign",
+      "language": "hinglish",
+      "surface": "phone",
+      "perturbation": "code_switch_safe",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR04",
+      "label": "benign",
+      "language": "ta",
+      "surface": "phone",
+      "perturbation": "regional_safety_advice",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR05",
+      "label": "benign",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "remote_support_context",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR06",
+      "label": "benign",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "courier_context",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR07",
+      "label": "benign",
+      "language": "hi",
+      "surface": "phone",
+      "perturbation": "public_awareness",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR08",
+      "label": "benign",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "bank_routine",
+      "expected": false,
+      "observed": false,
+      "observed_level": "LOW",
+      "top_path": null
+    },
+    {
+      "id": "AR09",
+      "label": "scam",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "paraphrase",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "digital_arrest"
+    },
+    {
+      "id": "AR10",
+      "label": "scam",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "asr_noise",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "bank_account_takeover"
+    },
+    {
+      "id": "AR11",
+      "label": "scam",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "remote_access_paraphrase",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "remote_device_takeover"
+    },
+    {
+      "id": "AR12",
+      "label": "scam",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "courier_paraphrase",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "courier_customs_extortion"
+    },
+    {
+      "id": "AR13",
+      "label": "scam",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "family_emotion",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "family_emergency_payment"
+    },
+    {
+      "id": "AR14",
+      "label": "scam",
+      "language": "hinglish",
+      "surface": "video_call",
+      "perturbation": "code_switch",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "bank_account_takeover"
+    },
+    {
+      "id": "AR15",
+      "label": "scam",
+      "language": "hi",
+      "surface": "phone",
+      "perturbation": "hindi_script",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "digital_arrest"
+    },
+    {
+      "id": "AR16",
+      "label": "scam",
+      "language": "ta",
+      "surface": "video_call",
+      "perturbation": "tamil_script",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "digital_arrest"
+    },
+    {
+      "id": "AR17",
+      "label": "scam",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "credential_synonym",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "bank_account_takeover"
+    },
+    {
+      "id": "AR18",
+      "label": "scam",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "payment_euphemism",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": null
+    },
+    {
+      "id": "AR19",
+      "label": "scam",
+      "language": "hinglish",
+      "surface": "phone",
+      "perturbation": "spelling_variant",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "remote_device_takeover"
+    },
+    {
+      "id": "AR20",
+      "label": "scam",
+      "language": "en",
+      "surface": "video_call",
+      "perturbation": "attacker_tamper_prompt",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "digital_arrest"
+    },
+    {
+      "id": "AR21",
+      "label": "scam",
+      "language": "en",
+      "surface": "phone",
+      "perturbation": "minimal_direct_action",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "bank_account_takeover"
+    },
+    {
+      "id": "AR22",
+      "label": "scam",
+      "language": "hi",
+      "surface": "video_call",
+      "perturbation": "code_switch_asr_noise",
+      "expected": true,
+      "observed": true,
+      "observed_level": "CRITICAL",
+      "top_path": "courier_customs_extortion"
+    }
+  ],
+  "status": "pass"
+}

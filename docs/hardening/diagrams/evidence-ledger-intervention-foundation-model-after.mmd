@@ -1,0 +1,7 @@
+flowchart LR
+    I["Local audio / transcript"] --> M["On-device foundation model"]
+    M --> T["Semantic tactic / role inference"]
+    T --> G["Threat Narrative Graph"]
+    G --> P["Counter-Pressure Protocol"]
+    P --> U["Safe exit"]
+    M --> O["Model monitoring + signed lifecycle"]

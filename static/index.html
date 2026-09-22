@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111d">
+  <title>SCAMTRACE — Conversational Attack Firewall</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#analysis">Skip to analysis</a>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div><h1>SCAMTRACE</h1><p>CONVERSATIONAL ATTACK FIREWALL</p></div>
+    </div>
+    <div class="top-controls">
+      <span id="runtime-status" class="runtime-status">CHECKING LOCAL RUNTIME</span>
+      <label class="compact-toggle">ELDER MODE <input id="elder-mode" type="checkbox"><span></span></label>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">PRIVACY-PRESERVING DECISION SUPPORT</p>
+        <h2>Detect the manipulation.<br><em>Explain the attack.</em> Protect the decision.</h2>
+        <p class="hero-copy">SCAMTRACE evaluates social-engineering behavior—not simply whether a voice sounds artificial. Processing stays on this device.</p>
+      </div>
+      <aside class="privacy-mini" aria-label="Privacy processing status">
+        <p class="panel-label">PRIVACY STATUS</p>
+        <div><span>Audio processing</span><b>LOCAL</b></div>
+        <div><span>Cloud API calls</span><b>NONE</b></div>
+        <div><span>Transcript storage</span><b>OFF</b></div>
+      </aside>
+    </section>
+
+    <section class="input-deck" aria-labelledby="input-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow">INPUT</p><h2 id="input-heading">Run a protected analysis</h2></div>
+        <label class="language-picker">LANGUAGE
+          <select id="language"><option value="auto">Auto-detect</option><option value="en">English</option><option value="ta">தமிழ் / Tamil</option><option value="hi">हिन्दी / Hindi</option><option value="hinglish">Hinglish</option></select>
+        </label>
+      </div>
+      <div class="scenario-grid" id="scenario-grid" aria-label="Demo scenarios"></div>
+      <div class="input-columns">
+        <div class="manual-input">
+          <label for="transcript">TRANSCRIPT OR LIVE ASR FALLBACK</label>
+          <textarea id="transcript" maxlength="50000" placeholder="Paste a conversation transcript here, or select a demo above."></textarea>
+          <div class="input-actions"><button id="analyze-text" class="primary-button">Analyze transcript <span>→</span></button><span id="text-count">0 / 50,000</span></div>
+        </div>
+        <div class="audio-stack">
+          <div class="audio-input">
+            <p class="panel-label">LOCAL AUDIO ANALYSIS</p>
+            <div id="drop-zone" class="drop-zone" tabindex="0" role="button" aria-label="Choose an audio file">
+              <input id="audio-file" type="file" accept=".wav,.mp3,.m4a,.aac,.ogg,.webm,.flac" hidden>
+              <span class="upload-icon" aria-hidden="true">↑</span>
+              <b>Drop call audio here</b><small>WAV, MP3, M4A, AAC, OGG, WebM or FLAC · max 25 MB</small>
+              <button id="browse-file" class="quiet-button" type="button">Choose file</button>
+            </div>
+            <div class="mic-row"><button id="record-button" class="record-button" type="button"><span></span> Record microphone</button><small id="mic-note">Browser capture; analysis remains local.</small></div>
+            <p id="audio-status" class="audio-status" aria-live="polite"></p>
+          </div>
+          <div class="live-transcript panel">
+            <div class="panel-top"><div><p class="panel-label">LIVE TRANSCRIPT</p><h3 id="transcript-language">Waiting for local audio</h3></div><span id="transcript-engine" class="source-tag">LOCAL</span></div>
+            <div id="transcript-output" class="transcript-output">Your transcript will appear here after local recording or upload. It stays in memory unless you explicitly export an incident report.</div>
+            <p id="transcript-corrections" class="transcript-corrections" hidden></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p id="error-banner" class="error-banner" role="alert" hidden></p>
+
+    <section id="analysis" class="analysis-grid" aria-live="polite">
+      <article class="threat-panel panel">
+        <div class="panel-top"><div><p class="panel-label">CURRENT THREAT</p><p id="threat-description" class="threat-description">Awaiting analysis</p></div><span id="source-tag" class="source-tag">LOCAL</span></div>
+        <div class="score-region">
+          <div id="score-ring" class="score-ring low"><div><b id="score-value">—</b><span>THREAT SCORE</span></div></div>
+          <div class="threat-copy"><p id="threat-level" class="threat-level low">READY</p><p id="score-note">Select a scenario, submit a transcript, or analyse an audio recording.</p></div>
+        </div>
+        <div class="component-bars" id="component-bars"></div>
+      </article>
+
+      <article class="warning-panel panel" id="warning-panel">
+        <p class="panel-label">INTERVENTION</p>
+        <h3 id="warning-title">Clear, practical guidance</h3>
+        <ul id="recommendations"><li>SCAMTRACE will explain any detected social-engineering indicators here.</li></ul>
+        <div id="intervention-script" class="intervention-script" hidden></div>
+        <p class="non-accusation">Decision support only. SCAMTRACE does not identify a caller as a criminal.</p>
+      </article>
+
+      <article class="progress-panel panel">
+        <div class="panel-top"><div><p class="panel-label">ATTACK PROGRESSION</p><h3 id="state-title">NORMAL</h3></div><div class="momentum"><span>SCAM MOMENTUM</span><b id="momentum-value">03</b></div></div>
+        <div id="stage-rail" class="stage-rail" aria-label="Attack progression stages"></div>
+        <div class="momentum-track"><div id="momentum-fill"></div></div>
+        <div id="momentum-points" class="momentum-points"></div>
+      </article>
+
+      <article class="evidence-panel panel">
+        <div class="panel-top"><div><p class="panel-label">WHY WE FLAGGED THIS</p><h3>Evidence, not a black box</h3></div><div class="report-actions"><label><input id="include-sensitive-report" type="checkbox"> Include sensitive values</label><button id="download-report" class="quiet-button" type="button" disabled>Export redacted report</button></div></div>
+        <div id="evidence-list" class="evidence-list"><p class="empty-state">Direct tactic evidence will appear here.</p></div>
+        <div id="feedback-actions" class="feedback-actions" hidden><span>Was this decision useful?</span><button id="feedback-confirmed" class="quiet-button" type="button">Confirmed scam</button><button id="feedback-false-alert" class="quiet-button" type="button">False alert</button><small id="feedback-note">Local memory only. No transcript is retained or used for automatic retraining.</small></div>
+      </article>
+
+      <article class="narrative-panel panel">
+        <div class="panel-top"><div><p class="panel-label">THREAT NARRATIVE GRAPH</p><h3 id="playbook-title">No active attack path</h3></div><span id="playbook-status" class="source-tag">EVIDENCE LEDGER</span></div>
+        <p id="narrative-summary" class="narrative-summary">Timestamped behavioural evidence will be assembled into a bounded attack path here.</p>
+        <ol id="narrative-ledger" class="narrative-ledger"><li><b>Waiting for evidence</b><span>SCAMTRACE will show the behavioural chain, not a black-box accusation.</span></li></ol>
+        <div class="counterfactual"><p class="panel-label">WHAT WOULD LOWER CONCERN?</p><p id="counterfactual-text">Independent verification through an official channel is always safer than trusting the caller’s number.</p></div>
+      </article>
+
+      <article class="timeline-panel panel">
+        <p class="panel-label">ATTACK TIMELINE</p>
+        <ol id="timeline" class="timeline"><li><time>00:00</time><div><b>Ready</b><p>Timeline will build as the conversation is analyzed.</p></div></li></ol>
+      </article>
+
+      <article class="voice-panel panel">
+        <p class="panel-label">VOICE AUTHENTICITY</p>
+        <div class="voice-main"><p id="voice-label">NOT ANALYZED</p><b id="voice-score">—</b></div>
+        <p id="voice-model" class="voice-model">Optional signal. It never determines scam risk by itself.</p>
+        <div id="voice-features" class="voice-features"></div>
+      </article>
+
+      <article class="privacy-panel panel">
+        <p class="panel-label">PROCESSING GUARANTEE</p>
+        <div id="privacy-details" class="privacy-details"><div><span>Audio processing</span><b>LOCAL</b></div><div><span>Cloud API calls</span><b>NONE</b></div><div><span>Raw audio retained</span><b>NO</b></div></div>
+      </article>
+    </section>
+  </main>
+  <footer>SCAMTRACE · CodeGyaan’26 prototype · Potential social-engineering indicators, never a legal conclusion.</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>

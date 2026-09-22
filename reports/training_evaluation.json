@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-09-22T17:26:31.317274+00:00",
+  "model": {
+    "name": "SCAMTRACE Robust Multilingual Language Baseline",
+    "algorithm": "class-balanced sparse logistic regression (word + phrase + character n-gram features)",
+    "feature_count": 4011
+  },
+  "data": {
+    "name": "ysangam/Indian_Cyber_Scam_PhoneCall_Hinglish_Dataset",
+    "license": "Apache-2.0",
+    "path": "/Users/jagadeeshwaran/cell phone $/data/raw/India_Cyber_Scam_Hinglish_Dataset.csv",
+    "raw_rows": 10000,
+    "columns_used": [
+      "text",
+      "label"
+    ],
+    "seed_rows_added": 40,
+    "asr_noise_variants_added": 70,
+    "unique_rows": 783,
+    "duplicates_removed": 9257,
+    "conflicting_texts_dropped": 0,
+    "template_families": 538,
+    "mixed_label_template_families": 0,
+    "class_distribution_after_deduplication": {
+      "benign": 130,
+      "scam": 653
+    }
+  },
+  "split": {
+    "method": "deterministic template-family group split; augmentation is train-only",
+    "validation_fraction": 0.2,
+    "train_rows": 628,
+    "validation_rows": 155
+  },
+  "calibration": {
+    "temperature": 1.0,
+    "bias": -1.0,
+    "method": "grid-search held-out class-balanced negative log likelihood",
+    "validation_rows": 155,
+    "negative_log_likelihood": 0.04102
+  },
+  "validation_metrics": {
+    "n": 155,
+    "accuracy": 0.9871,
+    "precision": 1.0,
+    "recall": 0.9852,
+    "f1": 0.9925,
+    "balanced_accuracy": 0.9926,
+    "macro_f1": 0.9725,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0148,
+    "confusion_matrix": {
+      "tp": 133,
+      "tn": 20,
+      "fp": 0,
+      "fn": 2
+    },
+    "probability_quality": {
+      "brier_score": 0.012012,
+      "balanced_brier_score": 0.007444,
+      "balanced_log_loss": 0.041039,
+      "expected_calibration_error": 0.014267
+    }
+  },
+  "candidate_metrics": {
+    "mnb": {
+      "n": 155,
+      "accuracy": 0.9871,
+      "precision": 1.0,
+      "recall": 0.9852,
+      "f1": 0.9925,
+      "balanced_accuracy": 0.9926,
+      "macro_f1": 0.9725,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0148,
+      "confusion_matrix": {
+        "tp": 133,
+        "tn": 20,
+        "fp": 0,
+        "fn": 2
+      },
+      "probability_quality": {
+        "brier_score": 0.012265,
+        "balanced_brier_score": 0.010921,
+        "balanced_log_loss": 0.042361,
+        "expected_calibration_error": 0.012237
+      }
+    },
+    "logreg": {
+      "n": 155,
+      "accuracy": 0.9871,
+      "precision": 1.0,
+      "recall": 0.9852,
+      "f1": 0.9925,
+      "balanced_accuracy": 0.9926,
+      "macro_f1": 0.9725,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0148,
+      "confusion_matrix": {
+        "tp": 133,
+        "tn": 20,
+        "fp": 0,
+        "fn": 2
+      },
+      "probability_quality": {
+        "brier_score": 0.012012,
+        "balanced_brier_score": 0.007444,
+        "balanced_log_loss": 0.041039,
+        "expected_calibration_error": 0.014267
+      }
+    }
+  },
+  "selected_algorithm": "logreg",
+  "limitations": [
+    "Template-family holdout only, not real-world phone-call accuracy.",
+    "The public corpus is Hinglish-focused; Tamil and Hindi need their own labelled validation."
+  ]
+}
