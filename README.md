@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="#quick-start"><img src="https://img.shields.io/badge/LOCAL--FIRST-0B1624?style=flat-square&labelColor=0B1624&color=2DD4BF" alt="Local-first" /></a>
+  <a href="https://github.com/JagadeeshwaranCEO/SCAMTRACE/actions/workflows/ci.yml"><img src="https://github.com/JagadeeshwaranCEO/SCAMTRACE/actions/workflows/ci.yml/badge.svg" alt="SCAMTRACE CI" /></a>
   <a href="#verify-the-build"><img src="https://img.shields.io/badge/TESTS-32%20PASSING-0B1624?style=flat-square&labelColor=0B1624&color=60A5FA" alt="32 tests passing" /></a>
   <a href="docs/MODEL_CARD.md"><img src="https://img.shields.io/badge/ML-EXPLAINABLE-0B1624?style=flat-square&labelColor=0B1624&color=A78BFA" alt="Explainable ML" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-0B1624?style=flat-square&labelColor=0B1624&color=FBBF24" alt="MIT License" /></a>
