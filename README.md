@@ -1,18 +1,18 @@
+<h1 align="center">SCAMTRACE</h1>
+
+<p align="center"><strong>Conversational Attack Firewall</strong></p>
+
+<p align="center">Detect the manipulation. Explain the attack. Protect the decision.</p>
+
 <p align="center">
-  <img src="assets/scamtrace-banner.svg" alt="SCAMTRACE — Conversational Attack Firewall" width="100%" />
+  <a href="#quick-start"><img src="https://img.shields.io/badge/LOCAL--FIRST-0B1624?style=flat-square&labelColor=0B1624&color=2DD4BF" alt="Local-first" /></a>
+  <a href="#verify-the-build"><img src="https://img.shields.io/badge/TESTS-32%20PASSING-0B1624?style=flat-square&labelColor=0B1624&color=60A5FA" alt="32 tests passing" /></a>
+  <a href="docs/MODEL_CARD.md"><img src="https://img.shields.io/badge/ML-EXPLAINABLE-0B1624?style=flat-square&labelColor=0B1624&color=A78BFA" alt="Explainable ML" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-0B1624?style=flat-square&labelColor=0B1624&color=FBBF24" alt="MIT License" /></a>
 </p>
 
 <p align="center">
-  <a href="#quick-start"><img src="https://img.shields.io/badge/RUNTIME-LOCAL--ONLY-1DE9B6?style=for-the-badge&labelColor=07111F" alt="Local only runtime" /></a>
-  <a href="#verify-the-build"><img src="https://img.shields.io/badge/TESTS-32%20PASSING-7DD3FC?style=for-the-badge&labelColor=07111F" alt="32 tests passing" /></a>
-  <a href="docs/MODEL_CARD.md"><img src="https://img.shields.io/badge/ML-EXPLAINABLE-A78BFA?style=for-the-badge&labelColor=07111F" alt="Explainable ML" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-FBBF24?style=for-the-badge&labelColor=07111F" alt="MIT License" /></a>
-</p>
-
-<p align="center"><strong>Detect the manipulation. Explain the attack. Protect the decision.</strong></p>
-
-<p align="center">
-  <a href="#demo-mode">Live demo</a> · <a href="docs/ARCHITECTURE.md">Architecture</a> · <a href="docs/ML_HARDENING.md">ML hardening</a> · <a href="docs/PRIVACY.md">Privacy</a> · <a href="docs/DEMO_GUIDE.md">Demo guide</a>
+  <a href="#demo-mode">Demo</a> · <a href="docs/ARCHITECTURE.md">Architecture</a> · <a href="docs/ML_HARDENING.md">ML hardening</a> · <a href="docs/PRIVACY.md">Privacy</a> · <a href="docs/DEMO_GUIDE.md">Demo guide</a>
 </p>
 
 SCAMTRACE is a privacy-preserving, real-time conversational security layer for CodeGyaan’26. It consumes a typed transcript, local ASR segment stream, or uploaded recording and identifies behavioral signs of social engineering: authority impersonation, threats, urgency, isolation, credential extraction, payment demands, and remote-access requests.
@@ -45,9 +45,11 @@ flowchart LR
     H --> I[Redacted local incident report]
 ```
 
-<p align="center">
-  <img src="docs/audit/01-current-interface.png" alt="SCAMTRACE local dashboard" width="900" />
-</p>
+> **Live dashboard visuals:** the repository deliberately avoids embedding a
+> low-resolution interface screenshot. Run `./run.sh` and open the local
+> dashboard for the interactive transcript, evidence timeline, and safe-action
+> experience. The project image will be replaced only with a verified,
+> full-resolution capture of the redesigned live interface.
 
 ## What works
 
