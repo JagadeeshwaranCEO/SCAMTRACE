@@ -1,6 +1,6 @@
 # SCAMTRACE Adversarial Decision Evaluation v1
 
-Generated: 2026-09-22T17:26:34.629324+00:00
+Generated: 2026-09-25T07:29:39.568297+00:00
 
 Internally authored red-team cases; 8 benign and 14 scam examples across paraphrase, ASR-noise, code-switching, and regional-language conditions.
 
@@ -33,7 +33,7 @@ Measured local-engine decision outcomes. Not independent field evaluation, popul
 | AR10 | scam | en | asr_noise | CRITICAL | bank_account_takeover | yes |
 | AR11 | scam | en | remote_access_paraphrase | CRITICAL | remote_device_takeover | yes |
 | AR12 | scam | en | courier_paraphrase | CRITICAL | courier_customs_extortion | yes |
-| AR13 | scam | en | family_emotion | CRITICAL | family_emergency_payment | yes |
+| AR13 | scam | en | family_emotion | HIGH | family_emergency_payment | yes |
 | AR14 | scam | hinglish | code_switch | CRITICAL | bank_account_takeover | yes |
 | AR15 | scam | hi | hindi_script | CRITICAL | digital_arrest | yes |
 | AR16 | scam | ta | tamil_script | CRITICAL | digital_arrest | yes |

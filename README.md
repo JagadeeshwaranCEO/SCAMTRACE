@@ -60,8 +60,8 @@ flowchart LR
 
 - Local incremental-analysis interface: start an ephemeral session and submit timestamped ASR segments as they arrive. Every segment receives a new threat score, evidence, timeline, and intervention status.
 - A local dashboard exists only as a demonstration surface, with scenarios, transcript input, audio upload, microphone capture, live evidence, timeline, and JSON incident report export.
-- Local whisper.cpp ASR adapter with timestamped segments. The installed multilingual Whisper base model supports English, Tamil, Hindi, and Hinglish-adjacent speech.
-- Layered scam intelligence: auditable phrase/tactic detection with safety-advice polarity guards + a safe JSON language baseline trained from licensed public Hinglish call data + non-linear attack progression + evidence fusion.
+- Local whisper.cpp ASR adapter with timestamped segments and language-specific security-term prompts. The installed multilingual Whisper base model supports English, Tamil, Hindi, and Hinglish-adjacent speech.
+- Layered scam intelligence: auditable multilingual phrase/pattern detection with English/Hindi/Tamil safety-advice polarity guards + a safe JSON language baseline trained from licensed public Hinglish data and balanced authored Hindi/Tamil development data + non-linear attack progression + evidence fusion.
 - Threat Narrative Graph: timestamped tactic evidence is compared with bounded digital-arrest, bank takeover, courier/customs, family-emergency, and remote-device takeover playbooks. It reports behavioural alignment—not a probability or caller identity.
 - Versioned case graph: every narrative exports a stable evidence → tactic → playbook schema with timestamps and provenance, without caller identity or raw transcript.
 - Counter-Pressure Protocol: instead of only assigning a level, SCAMTRACE explains the irreversible action at risk, breaks isolation, gives a safe independent-verification route, and states what evidence would lower concern.
@@ -161,6 +161,7 @@ Scenario voice provenance is visibly labelled as a demo fixture. It never substi
     .venv/bin/python scripts/train_scam_classifier.py
     .venv/bin/python -m pytest
     .venv/bin/python scripts/evaluate.py
+    .venv/bin/python scripts/evaluate_multilingual.py
     .venv/bin/python scripts/evaluate_decision_contracts.py
     .venv/bin/python scripts/evaluate_adversarial.py
     .venv/bin/python scripts/benchmark.py
@@ -168,7 +169,7 @@ Scenario voice provenance is visibly labelled as a demo fixture. It never substi
 
 Artifacts are written to reports/evaluation.json, reports/evaluation.md, reports/performance.json, and reports/performance.md.
 
-Training uses the Apache-2.0 [Indian Cyber Scam PhoneCall Hinglish Dataset](https://huggingface.co/datasets/ysangam/Indian_Cyber_Scam_PhoneCall_Hinglish_Dataset), restricted to text and label columns. The current data audit found that 10,000 source rows collapse to 783 unique transcripts, so SCAMTRACE splits by normalized template family—not raw row—before generating 70 ASR-spelling variants from training data only. The selected class-balanced sparse logistic baseline recorded 98.71% accuracy, 97.25% macro F1, 99.26% balanced accuracy, 0.00% FPR, 1.48% FNR, 0.0074 balanced Brier, and 0.0143 ECE on a 155-record template-family holdout. It was selected over Naive Bayes for better score quality, not inflated accuracy. This is template-corpus performance, not real-world call accuracy. The separate 20-case curated multilingual regression suite currently passes 20/20, while the post-improvement 22-case authored adversarial decision gate reports TP 14, TN 8, FP 0, FN 0; neither is independent evaluation. Latest text analysis averaged 1.319 ms with 32.91 MB peak RSS. A prior local Whisper run averaged 1.08 s on a 10.5-second official Whisper sample.
+Training uses the Apache-2.0 [Indian Cyber Scam PhoneCall Hinglish Dataset](https://huggingface.co/datasets/ysangam/Indian_Cyber_Scam_PhoneCall_Hinglish_Dataset), restricted to text and label columns, plus 60 balanced authored Hindi/Tamil development records. The public 10,000 rows collapse to 783 unique transcripts, so SCAMTRACE splits by template family and generates ASR variants only inside the training fold. The selected language-and-class-balanced logistic baseline records 97.09% accuracy and 95.14% macro F1 on a 172-record template-family holdout. On a separate train-excluded, internally authored 24-case Hindi/Tamil regression set, the classifier records 95.83% accuracy and Full SCAMTRACE passes 24/24. These are development checks, not real-world call accuracy. The existing 20-case curated suite also passes 20/20. Latest text analysis averaged 2.105 ms with 33.38 MB peak RSS; a prior local Whisper run averaged 1.08 s on a 10.5-second official sample.
 
 ## Privacy
 

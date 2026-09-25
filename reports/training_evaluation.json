@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-22T17:26:31.317274+00:00",
+  "generated_at": "2026-09-25T07:23:25.452923+00:00",
   "model": {
     "name": "SCAMTRACE Robust Multilingual Language Baseline",
-    "algorithm": "class-balanced sparse logistic regression (word + phrase + character n-gram features)",
-    "feature_count": 4011
+    "algorithm": "language-and-class-balanced sparse logistic regression (word + phrase + character n-gram features)",
+    "feature_count": 5496
   },
   "data": {
     "name": "ysangam/Indian_Cyber_Scam_PhoneCall_Hinglish_Dataset",
@@ -15,104 +15,316 @@
       "label"
     ],
     "seed_rows_added": 40,
-    "asr_noise_variants_added": 70,
-    "unique_rows": 783,
+    "multilingual_rows_added": 60,
+    "multilingual_source": "data/processed/multilingual_training_v2.jsonl",
+    "asr_noise_variants_added": 69,
+    "unique_rows": 843,
     "duplicates_removed": 9257,
     "conflicting_texts_dropped": 0,
-    "template_families": 538,
+    "template_families": 598,
     "mixed_label_template_families": 0,
     "class_distribution_after_deduplication": {
-      "benign": 130,
-      "scam": 653
+      "benign": 160,
+      "scam": 683
     }
   },
   "split": {
     "method": "deterministic template-family group split; augmentation is train-only",
     "validation_fraction": 0.2,
-    "train_rows": 628,
-    "validation_rows": 155
+    "train_rows": 671,
+    "validation_rows": 172
   },
   "calibration": {
-    "temperature": 1.0,
-    "bias": -1.0,
-    "method": "grid-search held-out class-balanced negative log likelihood",
-    "validation_rows": 155,
-    "negative_log_likelihood": 0.04102
+    "temperature": 4.0,
+    "bias": -3.0,
+    "method": "grid-search held-out language-and-class-balanced negative log likelihood",
+    "validation_rows": 172,
+    "negative_log_likelihood": 0.28613
   },
   "validation_metrics": {
-    "n": 155,
-    "accuracy": 0.9871,
-    "precision": 1.0,
-    "recall": 0.9852,
-    "f1": 0.9925,
-    "balanced_accuracy": 0.9926,
-    "macro_f1": 0.9725,
-    "false_positive_rate": 0.0,
-    "false_negative_rate": 0.0148,
+    "n": 172,
+    "accuracy": 0.9709,
+    "precision": 0.9857,
+    "recall": 0.9787,
+    "f1": 0.9822,
+    "balanced_accuracy": 0.9571,
+    "macro_f1": 0.9514,
+    "false_positive_rate": 0.0645,
+    "false_negative_rate": 0.0213,
     "confusion_matrix": {
-      "tp": 133,
-      "tn": 20,
-      "fp": 0,
-      "fn": 2
+      "tp": 138,
+      "tn": 29,
+      "fp": 2,
+      "fn": 3
     },
     "probability_quality": {
-      "brier_score": 0.012012,
-      "balanced_brier_score": 0.007444,
-      "balanced_log_loss": 0.041039,
-      "expected_calibration_error": 0.014267
+      "brier_score": 0.062301,
+      "balanced_brier_score": 0.062487,
+      "balanced_log_loss": 0.236636,
+      "expected_calibration_error": 0.158057
+    },
+    "by_language": {
+      "en": {
+        "n": 121,
+        "accuracy": 0.9917,
+        "precision": 1.0,
+        "recall": 0.99,
+        "f1": 0.995,
+        "balanced_accuracy": 0.995,
+        "macro_f1": 0.9859,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.01,
+        "confusion_matrix": {
+          "tp": 99,
+          "tn": 21,
+          "fp": 0,
+          "fn": 1
+        }
+      },
+      "hi": {
+        "n": 5,
+        "accuracy": 0.6,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667,
+        "balanced_accuracy": 0.75,
+        "macro_f1": 0.5833,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.5,
+        "confusion_matrix": {
+          "tp": 2,
+          "tn": 1,
+          "fp": 0,
+          "fn": 2
+        }
+      },
+      "hinglish": {
+        "n": 40,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "macro_f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 35,
+          "tn": 5,
+          "fp": 0,
+          "fn": 0
+        }
+      },
+      "ta": {
+        "n": 6,
+        "accuracy": 0.6667,
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667,
+        "balanced_accuracy": 0.75,
+        "macro_f1": 0.6667,
+        "false_positive_rate": 0.5,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 2,
+          "tn": 2,
+          "fp": 2,
+          "fn": 0
+        }
+      }
     }
   },
   "candidate_metrics": {
     "mnb": {
-      "n": 155,
-      "accuracy": 0.9871,
+      "n": 172,
+      "accuracy": 0.9651,
       "precision": 1.0,
-      "recall": 0.9852,
-      "f1": 0.9925,
-      "balanced_accuracy": 0.9926,
-      "macro_f1": 0.9725,
+      "recall": 0.9574,
+      "f1": 0.9783,
+      "balanced_accuracy": 0.9787,
+      "macro_f1": 0.945,
       "false_positive_rate": 0.0,
-      "false_negative_rate": 0.0148,
+      "false_negative_rate": 0.0426,
       "confusion_matrix": {
-        "tp": 133,
-        "tn": 20,
+        "tp": 135,
+        "tn": 31,
         "fp": 0,
-        "fn": 2
+        "fn": 6
       },
       "probability_quality": {
-        "brier_score": 0.012265,
-        "balanced_brier_score": 0.010921,
-        "balanced_log_loss": 0.042361,
-        "expected_calibration_error": 0.012237
+        "brier_score": 0.035596,
+        "balanced_brier_score": 0.02992,
+        "balanced_log_loss": 0.106685,
+        "expected_calibration_error": 0.038485
+      },
+      "by_language": {
+        "en": {
+          "n": 121,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "balanced_accuracy": 1.0,
+          "macro_f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 100,
+            "tn": 21,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "hi": {
+          "n": 5,
+          "accuracy": 0.2,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.1667,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 1.0,
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 1,
+            "fp": 0,
+            "fn": 4
+          }
+        },
+        "hinglish": {
+          "n": 40,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "balanced_accuracy": 1.0,
+          "macro_f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 35,
+            "tn": 5,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "ta": {
+          "n": 6,
+          "accuracy": 0.6667,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.4,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 1.0,
+          "confusion_matrix": {
+            "tp": 0,
+            "tn": 4,
+            "fp": 0,
+            "fn": 2
+          }
+        }
       }
     },
     "logreg": {
-      "n": 155,
-      "accuracy": 0.9871,
-      "precision": 1.0,
-      "recall": 0.9852,
-      "f1": 0.9925,
-      "balanced_accuracy": 0.9926,
-      "macro_f1": 0.9725,
-      "false_positive_rate": 0.0,
-      "false_negative_rate": 0.0148,
+      "n": 172,
+      "accuracy": 0.9709,
+      "precision": 0.9857,
+      "recall": 0.9787,
+      "f1": 0.9822,
+      "balanced_accuracy": 0.9571,
+      "macro_f1": 0.9514,
+      "false_positive_rate": 0.0645,
+      "false_negative_rate": 0.0213,
       "confusion_matrix": {
-        "tp": 133,
-        "tn": 20,
-        "fp": 0,
-        "fn": 2
+        "tp": 138,
+        "tn": 29,
+        "fp": 2,
+        "fn": 3
       },
       "probability_quality": {
-        "brier_score": 0.012012,
-        "balanced_brier_score": 0.007444,
-        "balanced_log_loss": 0.041039,
-        "expected_calibration_error": 0.014267
+        "brier_score": 0.062301,
+        "balanced_brier_score": 0.062487,
+        "balanced_log_loss": 0.236636,
+        "expected_calibration_error": 0.158057
+      },
+      "by_language": {
+        "en": {
+          "n": 121,
+          "accuracy": 0.9917,
+          "precision": 1.0,
+          "recall": 0.99,
+          "f1": 0.995,
+          "balanced_accuracy": 0.995,
+          "macro_f1": 0.9859,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.01,
+          "confusion_matrix": {
+            "tp": 99,
+            "tn": 21,
+            "fp": 0,
+            "fn": 1
+          }
+        },
+        "hi": {
+          "n": 5,
+          "accuracy": 0.6,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6667,
+          "balanced_accuracy": 0.75,
+          "macro_f1": 0.5833,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.5,
+          "confusion_matrix": {
+            "tp": 2,
+            "tn": 1,
+            "fp": 0,
+            "fn": 2
+          }
+        },
+        "hinglish": {
+          "n": 40,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "balanced_accuracy": 1.0,
+          "macro_f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 35,
+            "tn": 5,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        "ta": {
+          "n": 6,
+          "accuracy": 0.6667,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6667,
+          "balanced_accuracy": 0.75,
+          "macro_f1": 0.6667,
+          "false_positive_rate": 0.5,
+          "false_negative_rate": 0.0,
+          "confusion_matrix": {
+            "tp": 2,
+            "tn": 2,
+            "fp": 2,
+            "fn": 0
+          }
+        }
       }
     }
   },
   "selected_algorithm": "logreg",
   "limitations": [
     "Template-family holdout only, not real-world phone-call accuracy.",
-    "The public corpus is Hinglish-focused; Tamil and Hindi need their own labelled validation."
+    "The public corpus is Hinglish-focused; Hindi and Tamil additions are authored development data, not an independent real-call benchmark."
   ]
 }

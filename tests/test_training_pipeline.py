@@ -1,5 +1,5 @@
 from backend.classifiers.scam_classifier import calibrate_model, predict_model, train_logistic_model, train_model
-from scripts.train_scam_classifier import asr_noise_augment, deduplicate_rows, group_split, template_family
+from scripts.train_scam_classifier import asr_noise_augment, deduplicate_rows, group_split, load_multilingual_rows, template_family
 
 
 def test_group_deduplication_keeps_duplicate_scripts_together() -> None:
@@ -62,3 +62,14 @@ def test_robust_logistic_baseline_is_safe_json_and_balances_classes(tmp_path) ->
 
 def test_template_family_removes_greeting_and_number_variation() -> None:
     assert template_family("Namaste sir cab 3 minute mein pahunch raha hai") == template_family("Hello madam cab 9 minute mein pahunch raha hai")
+
+
+def test_multilingual_training_expansion_is_balanced_and_script_native() -> None:
+    rows = load_multilingual_rows()
+    counts = {}
+    for row in rows:
+        counts[(row["language"], row["label"])] = counts.get((row["language"], row["label"]), 0) + 1
+    assert counts[("hi", "scam")] == counts[("hi", "benign")] >= 10
+    assert counts[("ta", "scam")] == counts[("ta", "benign")] >= 10
+    assert any("ओटीपी" in row["text"] for row in rows)
+    assert any("ஓடிபி" in row["text"] for row in rows)

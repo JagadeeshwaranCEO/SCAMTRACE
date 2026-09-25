@@ -2,16 +2,16 @@
 
 ## SCAMTRACE Multilingual Language Baseline
 
-- Source: the Apache-2.0 licensed [Indian Cyber Scam PhoneCall Hinglish Dataset](https://huggingface.co/datasets/ysangam/Indian_Cyber_Scam_PhoneCall_Hinglish_Dataset), combined with a 40-row team-curated multilingual seed corpus. Training uses text and label only; source metadata is excluded to prevent target leakage.
-- Data audit: the 10,040 source rows collapse to 783 unique normalized transcripts after deduplication (9,257 repeats removed). This exposes a strongly template-heavy corpus; it is not treated as 10,040 independent calls. The deduplicated set has 653 scam and 130 benign transcripts across 538 normalized template families.
-- Training volume: 628 original transcripts form the training fold; 70 deterministic ASR spelling/spacing variants are generated from that training fold only, yielding 698 fitting records. The template-family validation fold contains 155 original transcripts.
+- Source: the Apache-2.0 licensed [Indian Cyber Scam PhoneCall Hinglish Dataset](https://huggingface.co/datasets/ysangam/Indian_Cyber_Scam_PhoneCall_Hinglish_Dataset), a 40-row team-curated seed corpus, and a balanced 60-row authored Hindi/Tamil development expansion. Training uses transcript text and label only; source metadata is excluded from model features.
+- Data audit: the 10,100 input rows collapse to 843 unique normalized transcripts after deduplication (9,257 repeats removed). This exposes a strongly template-heavy public corpus; it is not treated as 10,000 independent calls. The deduplicated set has 683 scam and 160 benign transcripts across 598 normalized template families.
+- Training volume: 671 original transcripts form the training fold; 69 deterministic ASR spelling/spacing variants are generated from that training fold only, yielding 740 fitting records. The template-family validation fold contains 172 original transcripts.
 - Split integrity: greeting, filler, number, and handle variants are grouped into a template family before splitting. No augmentation is allowed in validation.
 - ASR resilience: training-only variants cover high-value security entities and confusions such as `o t p`, `u p i`, `any desk`, and `aadhar`.
-- Algorithm: class-balanced sparse logistic regression over normalized word, phrase, and character n-gram features, with held-out class-balanced calibration. Multinomial Naive Bayes remains a measured candidate baseline, not the selected artifact.
+- Algorithm: language-and-class-balanced sparse logistic regression over normalized word, phrase, and character n-gram features, with held-out language-and-class-balanced calibration. The selection objective includes worst-language balanced accuracy so the large Hinglish corpus cannot erase smaller native-script strata. Multinomial Naive Bayes remains a measured candidate baseline, not the selected artifact.
 - Artifact: models/scam_classifier.json; safe, inspectable JSON—not pickle.
 - Intended purpose: one bounded language signal in a layered, explainable risk engine.
 - Not intended for: legal accusation, caller identity, probability claims, or standalone fraud adjudication.
-- Evaluation: on the harder template-family holdout, the selected baseline recorded 98.71% accuracy, 97.25% macro F1, 99.26% balanced accuracy, 0.00% FPR, 1.48% FNR, 0.0074 balanced Brier score, and 0.0143 ECE (155 records; TP 133, TN 20, FP 0, FN 2). It was selected over the Naive Bayes candidate because its balanced Brier score was lower (0.0074 vs 0.0109); classification metrics were tied. A separate 20-row curated multilingual regression set passes 20/20 and the internally authored 22-row adversarial decision suite reports TP 14, TN 8, FP 0, FN 0. Neither result is independent or representative of field data.
+- Evaluation: on the template-family holdout, the selected baseline recorded 97.09% accuracy, 95.14% macro F1, 95.71% balanced accuracy, 6.45% FPR, and 2.13% FNR (172 records; TP 138, TN 29, FP 2, FN 3). A separate train-excluded 24-row authored Hindi/Tamil regression set recorded 95.83% classifier accuracy and 100% full-pipeline accuracy (12 scam, 12 benign); the existing 20-row curated multilingual suite also passes 20/20. These are development regression checks—not independent real-call or population-performance estimates.
 - Risks: repeated-template corpus structure, phrasing / domain shift, dialect coverage, short-text uncertainty, and lexical correlation.
 
 ## STDM-1 — SCAMTRACE Threat Decision Model
@@ -28,7 +28,7 @@
 - Source: [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and its official multilingual base conversion.
 - License: whisper.cpp is MIT; verify applicable upstream model terms before redistribution.
 - Intended purpose: local speech-to-text with timestamped segments.
-- Evaluation conditions: one official Whisper sample exercised end-to-end in this build; target-language field WER not measured.
+- Evaluation conditions: one official Whisper sample exercised end-to-end in this build; target-language field WER is not measured. Language-specific decoding prompts now preserve common Hindi/Tamil security entities but do not replace acoustic recognition.
 - Risks: noisy calls, telephony compression, Tamil/Hindi code-switching, accents, and short speech can degrade transcription.
 
 ## Acoustic anomaly fallback

@@ -19,11 +19,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from backend.classifiers.scam_classifier import calibrate_model, predict_model, train_logistic_model, train_model
 from backend.config import ROOT
-from backend.utils.text import normalize_text
+from backend.utils.text import detect_language, normalize_text
 
 
 DEFAULT_DATASET = ROOT / "data" / "raw" / "India_Cyber_Scam_Hinglish_Dataset.csv"
 SEED_DATASET = ROOT / "data" / "processed" / "training_seed.jsonl"
+MULTILINGUAL_DATASET = ROOT / "data" / "processed" / "multilingual_training_v2.jsonl"
 ASR_VARIANTS = (
     (r"\botp\b", "o t p"),
     (r"\bcvv\b", "c v v"),
@@ -90,6 +91,16 @@ def load_seed_rows() -> list[dict[str, str]]:
     return [
         {**json.loads(line), "source": "scamtrace_curated_seed"}
         for line in SEED_DATASET.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+
+
+def load_multilingual_rows() -> list[dict[str, str]]:
+    if not MULTILINGUAL_DATASET.exists():
+        return []
+    return [
+        json.loads(line)
+        for line in MULTILINGUAL_DATASET.read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
 
@@ -173,6 +184,14 @@ def classification_metrics(rows: list[dict[str, str]], model: dict[str, Any]) ->
     }
 
 
+def metrics_by_language(rows: list[dict[str, str]], model: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    grouped: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in rows:
+        language = str(row.get("language") or detect_language(row["text"], "auto"))
+        grouped[language].append(row)
+    return {language: classification_metrics(items, model) for language, items in sorted(grouped.items())}
+
+
 def probability_metrics(rows: list[dict[str, str]], model: dict[str, Any]) -> dict[str, float]:
     """Measure score quality separately from the alert decision threshold."""
     values = [(predict_model(model, row["text"])["scam_score"], 1 if row["label"] == "scam" else 0) for row in rows]
@@ -209,19 +228,27 @@ def main() -> None:
     parser.add_argument("--dataset", type=Path, default=DEFAULT_DATASET)
     parser.add_argument("--seed-only", action="store_true")
     parser.add_argument("--without-seed", action="store_true")
+    parser.add_argument("--without-multilingual", action="store_true")
     parser.add_argument("--without-asr-augmentation", action="store_true")
     parser.add_argument("--algorithm", choices=("auto", "mnb", "logreg"), default="auto")
     args = parser.parse_args()
 
     if args.seed_only:
-        raw_rows, source_metadata = load_seed_rows(), {"name": "SCAMTRACE curated seed", "raw_rows": 40}
+        raw_rows = load_seed_rows()
+        source_metadata = {"name": "SCAMTRACE curated seed", "raw_rows": len(raw_rows)}
     else:
         if not args.dataset.exists():
             raise SystemExit(f"Dataset unavailable: {args.dataset}")
         raw_rows, source_metadata = load_real_rows(args.dataset)
         if not args.without_seed:
-            raw_rows.extend(load_seed_rows())
-            source_metadata["seed_rows_added"] = 40
+            seed_rows = load_seed_rows()
+            raw_rows.extend(seed_rows)
+            source_metadata["seed_rows_added"] = len(seed_rows)
+    if not args.without_multilingual:
+        multilingual_rows = load_multilingual_rows()
+        raw_rows.extend(multilingual_rows)
+        source_metadata["multilingual_rows_added"] = len(multilingual_rows)
+        source_metadata["multilingual_source"] = str(MULTILINGUAL_DATASET.relative_to(ROOT))
     rows, dedupe_metadata = deduplicate_rows(raw_rows)
     rows, family_metadata = assign_template_groups(rows)
     train_rows, validation_rows = group_split(rows)
@@ -247,7 +274,11 @@ def main() -> None:
     }
     candidates = {name: calibrate_model(model, validation_rows, class_balanced=True) for name, model in candidates.items()}
     candidate_metrics = {
-        name: {**classification_metrics(validation_rows, model), "probability_quality": probability_metrics(validation_rows, model)}
+        name: {
+            **classification_metrics(validation_rows, model),
+            "probability_quality": probability_metrics(validation_rows, model),
+            "by_language": metrics_by_language(validation_rows, model),
+        }
         for name, model in candidates.items()
     }
     if args.algorithm == "auto":
@@ -257,6 +288,11 @@ def main() -> None:
         selected = max(
             candidates,
             key=lambda name: (
+                min(
+                    value["balanced_accuracy"]
+                    for value in candidate_metrics[name]["by_language"].values()
+                    if value["n"] >= 4
+                ),
                 -float(candidate_metrics[name]["probability_quality"]["balanced_brier_score"]),
                 candidate_metrics[name]["macro_f1"],
                 candidate_metrics[name]["balanced_accuracy"],
@@ -285,7 +321,7 @@ def main() -> None:
         "selected_algorithm": selected,
         "limitations": [
             model["metadata"]["validation_note"],
-            "The public corpus is Hinglish-focused; Tamil and Hindi need their own labelled validation.",
+            "The public corpus is Hinglish-focused; Hindi and Tamil additions are authored development data, not an independent real-call benchmark.",
         ],
     }
     (ROOT / "reports" / "training_evaluation.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -308,6 +344,12 @@ def main() -> None:
         f"- False-positive / false-negative rate: {validation_metrics['false_positive_rate']:.2%} / {validation_metrics['false_negative_rate']:.2%}",
         f"- Balanced Brier / ECE: {validation_metrics['probability_quality']['balanced_brier_score']:.4f} / {validation_metrics['probability_quality']['expected_calibration_error']:.4f}",
         f"- Confusion matrix: {validation_metrics['confusion_matrix']}",
+        "", "## Validation by detected language", "",
+        "| Language | N | Accuracy | Macro F1 | FPR | FNR |", "| --- | ---: | ---: | ---: | ---: | ---: |",
+        *[
+            f"| {language} | {value['n']} | {value['accuracy']:.2%} | {value['macro_f1']:.2%} | {value['false_positive_rate']:.2%} | {value['false_negative_rate']:.2%} |"
+            for language, value in validation_metrics["by_language"].items()
+        ],
         "", "## Limits", "",
         *[f"- {item}" for item in report["limitations"]],
     ]

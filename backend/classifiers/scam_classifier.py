@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from backend.config import settings
-from backend.utils.text import normalize_text
+from backend.utils.text import detect_language, normalize_text
 
 
 MODEL_PATH = settings.root / "models" / "scam_classifier.json"
@@ -143,7 +143,11 @@ def train_model(
     """Train a safe JSON multinomial NB classifier from labelled text rows."""
     feature_config = feature_config or {"char_ngrams": True, "char_min": 3, "char_max": 4}
     cleaned = [
-        {"text": str(row["text"]), "label": str(row["label"]).lower()}
+        {
+            "text": str(row["text"]),
+            "label": str(row["label"]).lower(),
+            "language": str(row.get("language") or detect_language(str(row["text"]), "auto")),
+        }
         for row in rows
         if str(row.get("label", "")).lower() in {"scam", "benign"} and str(row.get("text", "")).strip()
     ]
@@ -170,7 +174,7 @@ def train_model(
     model = {
         "format": "scamtrace-mnb-v2",
         "model_name": "SCAMTRACE Multilingual Social-Engineering Baseline",
-        "version": "2026.09.21-realdata-v1",
+        "version": "2026.09.25-multilingual-v2",
         "algorithm": "calibrated multinomial naive bayes (word + phrase + character n-gram features)",
         "training_rows": len(cleaned),
         "class_distribution": dict(class_counts),
@@ -198,7 +202,7 @@ def train_logistic_model(
     learning_rate: float = 0.16,
     l2: float = 0.0008,
 ) -> dict[str, Any]:
-    """Train a class-balanced sparse logistic baseline using local features.
+    """Train a language-and-class-balanced sparse logistic baseline.
 
     The model is intentionally small and inspectable. Unlike the previous NB
     baseline, its optimisation rebalances per-class loss so duplicated scam
@@ -206,7 +210,11 @@ def train_logistic_model(
     """
     feature_config = feature_config or {"char_ngrams": True, "char_min": 3, "char_max": 4}
     cleaned = [
-        {"text": str(row["text"]), "label": str(row["label"]).lower()}
+        {
+            "text": str(row["text"]),
+            "label": str(row["label"]).lower(),
+            "language": str(row.get("language") or detect_language(str(row["text"]), "auto")),
+        }
         for row in rows
         if str(row.get("label", "")).lower() in {"scam", "benign"} and str(row.get("text", "")).strip()
     ]
@@ -214,31 +222,37 @@ def train_logistic_model(
     if not class_counts["scam"] or not class_counts["benign"]:
         raise ValueError("training data must contain scam and benign labels")
     document_counts: Counter[str] = Counter()
-    prepared: list[tuple[Counter[str], int]] = []
+    prepared: list[tuple[Counter[str], int, str]] = []
     for row in cleaned:
         values = Counter(features(row["text"], feature_config))
         document_counts.update(values.keys())
-        prepared.append((values, 1 if row["label"] == "scam" else 0))
+        prepared.append((values, 1 if row["label"] == "scam" else 0, row["language"]))
     vocabulary = {feature for feature, count in document_counts.items() if count >= min_feature_count}
     weights = {feature: 0.0 for feature in vocabulary}
     intercept = 0.0
-    # Each class has equal aggregate influence, regardless of template count.
-    class_weight = {0: len(prepared) / (2 * class_counts["benign"]), 1: len(prepared) / (2 * class_counts["scam"])}
-    ordered = sorted(prepared, key=lambda item: (item[1], tuple(sorted(item[0].keys()))))
+    # Each language/label stratum has equal aggregate influence. This prevents
+    # the large public Hinglish corpus from erasing the smaller Hindi and Tamil
+    # development sets while preserving class balance within every script.
+    stratum_counts = Counter((language, label) for _, label, language in prepared)
+    stratum_weight = {
+        key: len(prepared) / (len(stratum_counts) * count)
+        for key, count in stratum_counts.items()
+    }
+    ordered = sorted(prepared, key=lambda item: (item[2], item[1], tuple(sorted(item[0].keys()))))
     for epoch in range(epochs):
         rate = learning_rate / (1.0 + epoch * 0.035)
-        for values, label in ordered:
+        for values, label, language in ordered:
             active = {feature: min(2.0, math.log1p(count)) for feature, count in values.items() if feature in vocabulary}
             logit = intercept + sum(weights[feature] * value for feature, value in active.items())
-            error = (_sigmoid(logit) - label) * class_weight[label]
+            error = (_sigmoid(logit) - label) * stratum_weight[(language, label)]
             intercept -= rate * error
             for feature, value in active.items():
                 weights[feature] -= rate * (error * value + l2 * weights[feature])
     model = {
         "format": "scamtrace-logreg-v1",
         "model_name": "SCAMTRACE Robust Multilingual Language Baseline",
-        "version": "2026.09.22-robust-v1",
-        "algorithm": "class-balanced sparse logistic regression (word + phrase + character n-gram features)",
+        "version": "2026.09.25-multilingual-v2",
+        "algorithm": "language-and-class-balanced sparse logistic regression (word + phrase + character n-gram features)",
         "training_rows": len(cleaned),
         "class_distribution": dict(class_counts),
         "feature_config": feature_config,
@@ -250,7 +264,11 @@ def train_logistic_model(
             "epochs": epochs,
             "learning_rate": learning_rate,
             "l2": l2,
-            "class_balancing": "inverse-frequency per-class loss weighting",
+            "class_balancing": "inverse-frequency per-language-and-class loss weighting",
+            "language_class_distribution": {
+                f"{language}:{'scam' if label else 'benign'}": count
+                for (language, label), count in sorted(stratum_counts.items())
+            },
         },
         "metadata": dict(metadata or {}),
         "notes": "Decision-support language signal. Not a population-calibrated fraud probability.",
@@ -264,30 +282,34 @@ def train_logistic_model(
 def calibrate_model(model: dict[str, Any], rows: Iterable[dict[str, Any]], class_balanced: bool = False) -> dict[str, Any]:
     """Fit a conservative temperature/bias pair using held-out labelled rows."""
     validation = [
-        (raw_score(model, str(row["text"]))[0], 1 if str(row["label"]).lower() == "scam" else 0)
+        (
+            raw_score(model, str(row["text"]))[0],
+            1 if str(row["label"]).lower() == "scam" else 0,
+            str(row.get("language") or detect_language(str(row["text"]), "auto")),
+        )
         for row in rows
     ]
     if not validation:
         return model
-    label_counts = Counter(label for _, label in validation)
+    stratum_counts = Counter((language, label) for _, label, language in validation)
     weights = {
-        label: len(validation) / (2 * label_counts[label]) if class_balanced and label_counts[label] else 1.0
-        for label in (0, 1)
+        key: len(validation) / (len(stratum_counts) * count) if class_balanced else 1.0
+        for key, count in stratum_counts.items()
     }
     best: tuple[float, float, float] | None = None
     for temperature in (1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0, 12.0, 16.0, 24.0, 32.0):
         for bias in (-3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0):
             loss = 0.0
-            for raw, label in validation:
+            for raw, label, language in validation:
                 probability = min(1 - 1e-8, max(1e-8, _sigmoid((raw + bias) / temperature)))
-                loss += weights[label] * -(label * math.log(probability) + (1 - label) * math.log(1 - probability))
-            candidate = (loss / sum(weights[label] for _, label in validation), temperature, bias)
+                loss += weights[(language, label)] * -(label * math.log(probability) + (1 - label) * math.log(1 - probability))
+            candidate = (loss / sum(weights[(language, label)] for _, label, language in validation), temperature, bias)
             if best is None or candidate < best:
                 best = candidate
     assert best is not None
     model["calibration"] = {
         "temperature": best[1], "bias": best[2],
-        "method": "grid-search held-out class-balanced negative log likelihood" if class_balanced else "grid-search held-out negative log likelihood",
+        "method": "grid-search held-out language-and-class-balanced negative log likelihood" if class_balanced else "grid-search held-out negative log likelihood",
         "validation_rows": len(validation), "negative_log_likelihood": round(best[0], 5),
     }
     return model

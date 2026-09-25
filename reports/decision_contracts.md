@@ -1,6 +1,6 @@
 # SCAMTRACE Behavioural Decision Contracts
 
-Generated: 2026-09-22T17:26:34.547293+00:00
+Generated: 2026-09-25T07:29:39.467353+00:00
 
 Deterministic safety and playbook contracts. This is not independent evaluation, field accuracy, or a model benchmark.
 

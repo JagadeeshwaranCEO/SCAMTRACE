@@ -7,10 +7,10 @@ Phase 12 — evidence-ledger, privacy-safe case export, adversarial-resilience v
 - Phase 0 audit: empty non-Git workspace; macOS 26.3.1 arm64; Python 3.14 globally and a project Python 3.11 test environment; Node 22; 113 GiB free disk; ffmpeg and Homebrew available.
 - Foundation: local server, configuration, .env parsing, structured local logs, static responsive dashboard, startup checks.
 - Text-first engine: auditable English / Tamil / Hindi / Hinglish tactic taxonomy; safe JSON-backed language baseline; sample corpora.
-- Model training: Apache-2.0 licensed public Hinglish phone-scam corpus ingested locally. A data audit exposed 10,000 rows collapsing to 783 unique scripts, so training now uses a template-family split, training-only ASR augmentation, class-balanced calibration, and a measured logistic-vs-Naive-Bayes candidate decision.
+- Model training: Apache-2.0 licensed public Hinglish phone-scam corpus ingested locally. A data audit exposed 10,000 rows collapsing to 783 unique scripts. The v2 artifact adds 60 balanced authored Hindi/Tamil records, language-and-class-balanced training/calibration, template-family splitting, training-only ASR augmentation, and a worst-language-aware logistic-vs-Naive-Bayes candidate decision.
 - Real-time core: bounded local in-memory session manager and REST segment-ingestion interface with expiry, capacity limits, ordered timestamps, explicit close, and no default transcript persistence.
 - STDM-1: bounded multiclass threat-state decision model, contrast-data generator, temperature calibration report, Brier/ECE calculation, and a hard SHADOW_ONLY deployment gate.
-- Live transcript resilience: codec-aware microphone capture, original-to-normalized security-term correction trail, and grouped ASR-noise language-model augmentation.
+- Live transcript resilience: codec-aware microphone capture, original-to-normalized security-term correction trail, grouped ASR-noise language-model augmentation, and Hindi/Tamil security-term prompts for local Whisper decoding.
 - Attack engine: non-linear state history, repeated-evidence accumulation, cross-signal critical escalation, timeline, Scam Momentum.
 - Fusion: threat score, LOW / VERIFY / HIGH / CRITICAL levels, explanation, interventions, and uncertainty messaging.
 - Threat Narrative Graph: bounded, timestamped alignment for digital-arrest, bank-account takeover, courier/customs, family-emergency, and remote-device takeover coercion patterns.
@@ -20,7 +20,7 @@ Phase 12 — evidence-ledger, privacy-safe case export, adversarial-resilience v
 - User-controlled incident handoff: the report includes a review checklist and official 1930 / cybercrime.gov.in reference, but never files a report or contacts a bank.
 - Local drift and feedback controls: content-free feature-coverage observation and explicit outcome feedback are bounded to process memory, are never telemetry, and cannot alter a live alert or trigger retraining.
 - Adversarial decision suite: actual local engine evaluation now covers authored paraphrase, ASR-noise, code-switching, Tamil, Hindi, Hinglish, video-call, remote-access, and tamper-prompt cases.
-- Safety-advice polarity guard: quoted advice such as “never share OTP” does not become an active credential-request signal; direct extraction requests still remain visible.
+- Multilingual safety-advice polarity guard: English prefix negation plus Hindi/Tamil suffix negation prevents advice such as “OTP साझा न करें” and “OTP-ஐ பகிர வேண்டாம்” from becoming active extraction signals.
 - Derived industry-hardening portfolio: `docs/hardening/` documents current evidence, architecture options, tradeoffs, residual risk, and the selected local-first structural path.
 - Audio: whisper.cpp and the local 147 MB multilingual base model installed and exercised end-to-end with an official local ASR test WAV.
 - Demo mode: seven deterministic scenarios, including safe human, safe synthetic, human scam, AI scam, Tamil, Hinglish, and remote-access/courier scam.
@@ -46,7 +46,7 @@ Phase 12 — evidence-ledger, privacy-safe case export, adversarial-resilience v
 
 - Live voice authenticity is a transparent acoustic anomaly fallback, not a benchmarked deepfake classifier. It preserves uncertainty rather than making a deceptive claim.
 - Tamil/Hindi ASR is supported by the installed base model but has not yet been benchmarked on a labelled regional audio set.
-- The public training corpus is Hinglish-focused and template-heavy: 10,000 rows collapse to 783 unique normalized transcripts, including only 130 benign examples after deduplication. Template-family metrics are not a field-performance claim. The separate evaluation set is a small curated regression suite, not an independent field benchmark.
+- The public training corpus remains Hinglish-focused and template-heavy. Hindi/Tamil training and evaluation additions are authored development material, not naturally recorded or independently collected calls. Template-family and authored-holdout metrics are not field-performance claims.
 - STDM-1 is trained only on authored synthetic contrast data. Its 0.30220 development ECE is too high for operational confidence, so it remains shadow-only.
 - Cellular call interception and Android packaging are deliberately out of scope.
 - The Threat Narrative Graph is a transparent bounded policy, not a broad semantic model. It needs independent, consented multilingual real-call evaluation before any publishable effectiveness claim.
@@ -63,12 +63,13 @@ Phase 12 — evidence-ledger, privacy-safe case export, adversarial-resilience v
 
 ## Test Results
 
-- pytest: 32 passed after versioned evidence-graph, redacted-report, feedback, drift, tamper-evasion, real-time, narrative, microphone, transcript-resilience, and robust-training changes.
+- pytest: 37 passed after multilingual prompt, taxonomy, safety-polarity, training, narrative-layout, evidence-graph, redacted-report, real-time, and robust-training changes.
 - Local audio → whisper.cpp → analysis: passed with local model.
-- Training template-family check: 98.71% accuracy, 97.25% macro F1, 99.26% balanced accuracy, 0.00% FPR, 1.48% FNR, 0.0074 balanced Brier, and 0.0143 ECE on 155 held-out public-corpus transcripts. The selected class-balanced logistic baseline tied Naive Bayes on classification but improved balanced Brier from 0.0109 to 0.0074; not a deployment benchmark.
+- Training template-family check: 97.09% accuracy, 95.14% macro F1, 95.71% balanced accuracy, 6.45% FPR, and 2.13% FNR on 172 held-out template-family transcripts. The language-balanced logistic model was selected for stronger worst-language behavior; this is not a deployment benchmark.
+- Hindi/Tamil authored holdout: classifier 95.83% accuracy and Full SCAMTRACE 24/24 (12 scam, 12 benign). Hindi full pipeline 12/12; Tamil full pipeline 12/12. Exact holdout rows are excluded from training, but the set is internally authored and not a real-call benchmark.
 - Regression: Full SCAMTRACE 20/20 on the curated multilingual 20-row suite. It verifies current expected behavior and is not an independent evaluation benchmark.
 - STDM-1 development: 66.67% state accuracy, 66.11% macro F1, Brier 0.43290, ECE 0.30220 on authored family-group contrast data. Shadow-only by design.
-- Performance: text analysis mean 1.319 ms after graph, redaction, tamper-evasion, aggregate-only monitoring, and the robust language artifact; peak RSS 32.91 MB. ASR latency was not rerun in the latest benchmark without an audio argument; the prior local Whisper run measured 1075.45 ms on a 10.5-second local validation clip.
+- Performance: text analysis mean 2.105 ms (p95 3.338 ms) after graph, redaction, tamper-evasion, aggregate-only monitoring, and the robust language artifact; peak RSS 33.38 MB. ASR latency was not rerun in the latest benchmark without an audio argument; the prior local Whisper run measured 1075.45 ms on a 10.5-second local validation clip.
 - Behavioural decision contracts: 8/8 deterministic contracts pass for safe advice, safe context, digital arrest, bank takeover, remote takeover, courier, family emergency, and Tamil digital arrest. This is a design-contract suite, not a field benchmark.
 - Adversarial decision gate: 22/22 authored cases reached the expected engine decision (8 benign, 14 scam; TP 14, TN 8, FP 0, FN 0; precision/recall/F1 1.0). This is a post-improvement internal robustness gate, not independent or field performance.
 

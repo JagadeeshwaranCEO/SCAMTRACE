@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-22T17:26:34.629324+00:00",
+  "generated_at": "2026-09-25T07:29:39.568297+00:00",
   "name": "SCAMTRACE adversarial decision evaluation v1",
   "dataset": "Internally authored red-team cases; 8 benign and 14 scam examples across paraphrase, ASR-noise, code-switching, and regional-language conditions.",
   "scope": "Measured local-engine decision outcomes. Not independent field evaluation, population calibration, model-only evaluation, or a claim of real-world prevalence.",
@@ -530,7 +530,7 @@
       "perturbation": "family_emotion",
       "expected": true,
       "observed": true,
-      "observed_level": "CRITICAL",
+      "observed_level": "HIGH",
       "top_path": "family_emergency_payment"
     },
     {

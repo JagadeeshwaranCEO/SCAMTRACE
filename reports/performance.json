@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-09-22T17:26:34.834683+00:00",
+  "generated_at": "2026-09-25T07:29:39.273317+00:00",
   "environment": {
     "python": "3.11.15",
     "platform": "macOS-26.3.1-arm64-arm-64bit"
   },
-  "model_load_ms": 1.45,
+  "model_load_ms": 2.78,
   "text_analysis_ms": {
     "runs": 30,
-    "mean": 1.319,
-    "p50": 1.203,
-    "p95": 1.488
+    "mean": 2.105,
+    "p50": 1.843,
+    "p95": 3.338
   },
-  "python_cpu_time_per_text_analysis_ms": 1.311,
-  "peak_rss_mb": 32.91,
-  "language_model_size_bytes": 120330,
+  "python_cpu_time_per_text_analysis_ms": 2.071,
+  "peak_rss_mb": 33.38,
+  "language_model_size_bytes": 178548,
   "asr_model_size_bytes": 147951465,
   "asr_latency": {
     "measured": false,

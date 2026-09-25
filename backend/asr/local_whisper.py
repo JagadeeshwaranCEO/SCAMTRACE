@@ -18,6 +18,17 @@ from backend.config import settings
 from backend.utils.transcript import normalize_security_terms
 
 
+# Short language-specific context primes Whisper for high-value security terms
+# that are often split or anglicised in phone audio. It does not force a
+# transcript or substitute text; decoding still comes entirely from the audio.
+ASR_PROMPTS = {
+    "en": "Cybercrime, bank security, customs, Aadhaar, KYC, OTP, PIN, CVV, UPI, AnyDesk, TeamViewer.",
+    "hi": "साइबर क्राइम, पुलिस विभाग, बैंक सुरक्षा, कस्टम विभाग, आधार, केवाईसी, ओटीपी, पिन, सीवीवी, यूपीआई, ऐनीडेस्क।",
+    "ta": "சைபர் கிரைம், காவல் துறை, வங்கி பாதுகாப்பு, சுங்கத் துறை, ஆதார், கேஒய்சி, ஓடிபி, பின், சிவிவி, யுபிஐ, எனிடெஸ்க்.",
+    "hinglish": "Cyber crime, police department, bank security, Aadhaar, KYC, OTP, PIN, CVV, UPI, AnyDesk; account block hoga, paisa transfer karo.",
+}
+
+
 class LocalWhisperEngine:
     def __init__(self) -> None:
         self.model_path = settings.asr_model
@@ -60,6 +71,9 @@ class LocalWhisperEngine:
             ]
             if language != "auto":
                 command.extend(["-l", {"hinglish": "hi", "ta": "ta", "hi": "hi", "en": "en"}.get(language, language)])
+                prompt = ASR_PROMPTS.get(language)
+                if prompt:
+                    command.extend(["--prompt", prompt, "--carry-initial-prompt"])
             result = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
             if result.returncode != 0:
                 error = (result.stderr or result.stdout).strip()[-1000:]

@@ -1,0 +1,407 @@
+{
+  "generated_at": "2026-09-25T07:29:39.333731+00:00",
+  "dataset": {
+    "name": "SCAMTRACE Hindi/Tamil authored holdout v1",
+    "path": "data/evaluation/multilingual_holdout_v1.jsonl",
+    "rows": 24,
+    "class_distribution": {
+      "scam": 12,
+      "benign": 12
+    },
+    "language_distribution": {
+      "hi": 12,
+      "ta": 12
+    },
+    "training_exclusion": "These exact rows are not loaded by scripts/train_scam_classifier.py.",
+    "limit": "Authored regression holdout, not independent real-call accuracy or population calibration."
+  },
+  "metrics": {
+    "hi": {
+      "classifier": {
+        "n": 12,
+        "accuracy": 0.9167,
+        "precision": 1.0,
+        "recall": 0.8333,
+        "f1": 0.9091,
+        "balanced_accuracy": 0.9167,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.1667,
+        "confusion_matrix": {
+          "tp": 5,
+          "tn": 6,
+          "fp": 0,
+          "fn": 1
+        }
+      },
+      "full_scamtrace": {
+        "n": 12,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 6,
+          "tn": 6,
+          "fp": 0,
+          "fn": 0
+        }
+      }
+    },
+    "overall": {
+      "classifier": {
+        "n": 24,
+        "accuracy": 0.9583,
+        "precision": 1.0,
+        "recall": 0.9167,
+        "f1": 0.9565,
+        "balanced_accuracy": 0.9583,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0833,
+        "confusion_matrix": {
+          "tp": 11,
+          "tn": 12,
+          "fp": 0,
+          "fn": 1
+        }
+      },
+      "full_scamtrace": {
+        "n": 24,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 12,
+          "tn": 12,
+          "fp": 0,
+          "fn": 0
+        }
+      }
+    },
+    "ta": {
+      "classifier": {
+        "n": 12,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 6,
+          "tn": 6,
+          "fp": 0,
+          "fn": 0
+        }
+      },
+      "full_scamtrace": {
+        "n": 12,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "balanced_accuracy": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "confusion_matrix": {
+          "tp": 6,
+          "tn": 6,
+          "fp": 0,
+          "fn": 0
+        }
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": "HI-S01",
+      "actual": "scam",
+      "language": "hi",
+      "classifier_score": 0.9881,
+      "classifier_label": "scam_language",
+      "threat_score": 41,
+      "threat_level": "VERIFY",
+      "tactics": [
+        "AUTHORITY_IMPERSONATION",
+        "THREAT"
+      ]
+    },
+    {
+      "id": "HI-S02",
+      "actual": "scam",
+      "language": "hi",
+      "classifier_score": 0.8592,
+      "classifier_label": "scam_language",
+      "threat_score": 58,
+      "threat_level": "HIGH",
+      "tactics": [
+        "CREDENTIAL_REQUEST",
+        "THREAT",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "HI-S03",
+      "actual": "scam",
+      "language": "hi",
+      "classifier_score": 0.9996,
+      "classifier_label": "scam_language",
+      "threat_score": 67,
+      "threat_level": "CRITICAL",
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "AUTHORITY_IMPERSONATION",
+        "THREAT"
+      ]
+    },
+    {
+      "id": "HI-S04",
+      "actual": "scam",
+      "language": "hi",
+      "classifier_score": 0.8883,
+      "classifier_label": "scam_language",
+      "threat_score": 52,
+      "threat_level": "HIGH",
+      "tactics": [
+        "REMOTE_ACCESS",
+        "ISOLATION"
+      ]
+    },
+    {
+      "id": "HI-S05",
+      "actual": "scam",
+      "language": "hi",
+      "classifier_score": 0.9781,
+      "classifier_label": "scam_language",
+      "threat_score": 62,
+      "threat_level": "CRITICAL",
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "FAMILY_EMERGENCY",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "HI-S06",
+      "actual": "scam",
+      "language": "hi",
+      "classifier_score": 0.5623,
+      "classifier_label": "uncertain",
+      "threat_score": 67,
+      "threat_level": "CRITICAL",
+      "tactics": [
+        "CREDENTIAL_REQUEST",
+        "AUTHORITY_IMPERSONATION",
+        "THREAT",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "HI-B01",
+      "actual": "benign",
+      "language": "hi",
+      "classifier_score": 0.0017,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "HI-B02",
+      "actual": "benign",
+      "language": "hi",
+      "classifier_score": 0.1452,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "HI-B03",
+      "actual": "benign",
+      "language": "hi",
+      "classifier_score": 0.0383,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "HI-B04",
+      "actual": "benign",
+      "language": "hi",
+      "classifier_score": 0.5155,
+      "classifier_label": "uncertain",
+      "threat_score": 4,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "HI-B05",
+      "actual": "benign",
+      "language": "hi",
+      "classifier_score": 0.0061,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "HI-B06",
+      "actual": "benign",
+      "language": "hi",
+      "classifier_score": 0.1436,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "TA-S01",
+      "actual": "scam",
+      "language": "ta",
+      "classifier_score": 0.9383,
+      "classifier_label": "scam_language",
+      "threat_score": 54,
+      "threat_level": "HIGH",
+      "tactics": [
+        "AUTHORITY_IMPERSONATION",
+        "THREAT",
+        "ISOLATION"
+      ]
+    },
+    {
+      "id": "TA-S02",
+      "actual": "scam",
+      "language": "ta",
+      "classifier_score": 1.0,
+      "classifier_label": "scam_language",
+      "threat_score": 64,
+      "threat_level": "CRITICAL",
+      "tactics": [
+        "CREDENTIAL_REQUEST",
+        "THREAT",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "TA-S03",
+      "actual": "scam",
+      "language": "ta",
+      "classifier_score": 0.9912,
+      "classifier_label": "scam_language",
+      "threat_score": 51,
+      "threat_level": "HIGH",
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "AUTHORITY_IMPERSONATION"
+      ]
+    },
+    {
+      "id": "TA-S04",
+      "actual": "scam",
+      "language": "ta",
+      "classifier_score": 0.9991,
+      "classifier_label": "scam_language",
+      "threat_score": 54,
+      "threat_level": "HIGH",
+      "tactics": [
+        "REMOTE_ACCESS",
+        "ISOLATION"
+      ]
+    },
+    {
+      "id": "TA-S05",
+      "actual": "scam",
+      "language": "ta",
+      "classifier_score": 0.9993,
+      "classifier_label": "scam_language",
+      "threat_score": 48,
+      "threat_level": "HIGH",
+      "tactics": [
+        "FINANCIAL_ACTION",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "TA-S06",
+      "actual": "scam",
+      "language": "ta",
+      "classifier_score": 0.9991,
+      "classifier_label": "scam_language",
+      "threat_score": 35,
+      "threat_level": "VERIFY",
+      "tactics": [
+        "AUTHORITY_IMPERSONATION",
+        "URGENCY"
+      ]
+    },
+    {
+      "id": "TA-B01",
+      "actual": "benign",
+      "language": "ta",
+      "classifier_score": 0.0,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "TA-B02",
+      "actual": "benign",
+      "language": "ta",
+      "classifier_score": 0.0087,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "TA-B03",
+      "actual": "benign",
+      "language": "ta",
+      "classifier_score": 0.002,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "TA-B04",
+      "actual": "benign",
+      "language": "ta",
+      "classifier_score": 0.1837,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "TA-B05",
+      "actual": "benign",
+      "language": "ta",
+      "classifier_score": 0.0,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    },
+    {
+      "id": "TA-B06",
+      "actual": "benign",
+      "language": "ta",
+      "classifier_score": 0.0344,
+      "classifier_label": "benign_language",
+      "threat_score": 1,
+      "threat_level": "LOW",
+      "tactics": []
+    }
+  ]
+}

@@ -26,6 +26,26 @@ def test_hinglish_credential_and_isolation_tactics() -> None:
     assert {"ISOLATION", "CREDENTIAL_REQUEST", "THREAT"} <= names
 
 
+def test_hindi_native_script_variants_detect_full_attack_chain() -> None:
+    names = tactic_names(
+        "मुंबई पुलिस से बोल रहा हूं। आपके नाम पर गिरफ्तारी वारंट है। "
+        "फोन मत रखिए, किसी से मत कहना और अभी यूपीआई से पैसे भेजिए।"
+    )
+    assert {"IDENTITY_CLAIM", "AUTHORITY_IMPERSONATION", "THREAT", "ISOLATION", "URGENCY", "FINANCIAL_ACTION"} <= names
+
+
+def test_tamil_native_script_variants_detect_full_attack_chain() -> None:
+    names = tactic_names(
+        "சுங்க அதிகாரி பேசுகிறேன். உங்கள் கணக்கு முடக்கப்படும். அழைப்பை நிறுத்தாதீர்கள். "
+        "இப்பொழுதே யுபிஐ மூலம் பணம் செலுத்துங்கள்."
+    )
+    assert {"IDENTITY_CLAIM", "AUTHORITY_IMPERSONATION", "THREAT", "ISOLATION", "URGENCY", "FINANCIAL_ACTION"} <= names
+
+
+def test_hindi_and_tamil_safety_advice_do_not_trigger_credential_request() -> None:
+    assert "CREDENTIAL_REQUEST" not in tactic_names("ओटीपी किसी के साथ साझा न करें।")
+    assert "CREDENTIAL_REQUEST" not in tactic_names("ஓடிபியை யாரிடமும் பகிர வேண்டாம்.")
+
+
 def test_normal_conversation_does_not_flag_social_engineering() -> None:
     assert not tactic_names("Could you bring the project notes to our meeting tomorrow morning?")
-
